@@ -27,6 +27,17 @@ class Users extends connection {
         return $data;
     }
 
+    public function getPatients(){
+        $data = array();
+        $result  = $this->conn->query("SELECT * FROM users  WHERE user_position = 3 ORDER BY id DESC");
+        if($result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+                $data[] = $row;
+            }
+        }
+        return $data;
+    }
+
     public function searchUser($username){
         $data = array();
 

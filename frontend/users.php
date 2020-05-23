@@ -40,9 +40,9 @@ include_once  '../backend/Users.php'
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <?php foreach (Users::getInstance()->getUsers() as $user) { ?>
+                                            <?php foreach (Users::getInstance()->getUsers() as $key => $user) { ?>
                                             <tr>
-                                                <th scope="col"><?= $user['id'] ?></th>
+                                                <th scope="col"><?= ++$key ?></th>
                                                 <th scope="col"><?= $user['fname'] . ' ' . $user['lname'] ?></th>
                                                 <th scope="col"><?= $user['email'] ?></th>
                                                 <th scope="col"><?= $user['position'] ?></th>

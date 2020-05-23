@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5db6e07-e8c5-4876-b700-1a84690f53a1" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/MainController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/authentication_controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/authentication_controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/user_ajax.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/user_ajax.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/users.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Users.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/includes/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/includes/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/includes/libs.php" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/includes/libs.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/includes/menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/includes/menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Users.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/patients.php" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/patients.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/users.php" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/users.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,20 +24,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="users.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/users.php">
+      <file leaf-file-name="Users.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/Users.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="596">
-              <caret line="145" column="125" selection-start-line="145" selection-start-column="125" selection-end-line="145" selection-end-column="125" />
+            <state relative-caret-position="405">
+              <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="styles.css" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/css/styles.css">
+      <file leaf-file-name="users.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/frontend/users.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="243" column="34" selection-start-line="243" selection-start-column="34" selection-end-line="243" selection-end-column="34" />
+            <state relative-caret-position="323">
+              <caret line="42" column="101" lean-forward="true" selection-start-line="42" selection-start-column="101" selection-end-line="42" selection-end-column="101" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="patients.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/patients.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1015">
+              <caret line="83" column="34" lean-forward="true" selection-start-line="83" selection-start-column="34" selection-end-line="83" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -89,8 +89,9 @@
       <find>$auth</find>
       <find>$mainCtrl</find>
       <find>modal</find>
-      <find>-modal</find>
       <find>border: non</find>
+      <find>-modal</find>
+      <find>pat</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -127,19 +128,19 @@
         <option value="$PROJECT_DIR$/js/pharmacy.js" />
         <option value="$PROJECT_DIR$/frontend/written_prescriptions.php" />
         <option value="$PROJECT_DIR$/frontend/prescriptions_for_written.php" />
-        <option value="$PROJECT_DIR$/frontend/patients.php" />
         <option value="$PROJECT_DIR$/frontend/inquiries.php" />
         <option value="$PROJECT_DIR$/data.sql" />
         <option value="$PROJECT_DIR$/frontend/index.php" />
         <option value="$PROJECT_DIR$/frontend/includes/menu.php" />
-        <option value="$PROJECT_DIR$/backend/Users.php" />
         <option value="$PROJECT_DIR$/frontend/includes/header.php" />
         <option value="$PROJECT_DIR$/backend/authentication_controller.php" />
         <option value="$PROJECT_DIR$/backend/user_ajax.php" />
         <option value="$PROJECT_DIR$/frontend/includes/libs.php" />
         <option value="$PROJECT_DIR$/backend/MainController.php" />
-        <option value="$PROJECT_DIR$/frontend/users.php" />
         <option value="$PROJECT_DIR$/css/styles.css" />
+        <option value="$PROJECT_DIR$/backend/Users.php" />
+        <option value="$PROJECT_DIR$/frontend/patients.php" />
+        <option value="$PROJECT_DIR$/frontend/users.php" />
       </list>
     </option>
   </component>
@@ -187,12 +188,6 @@
               <item name="PrescriptionBooks" type="b2602c69:ProjectViewProjectNode" />
               <item name="PrescriptionBooks" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="frontend" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="PrescriptionBooks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PrescriptionBooks" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="frontend" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="includes" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="PrescriptionBooks" type="b2602c69:ProjectViewProjectNode" />
@@ -246,12 +241,12 @@
       <workItem from="1589301368628" duration="1933000" />
       <workItem from="1589479980308" duration="5770000" />
       <workItem from="1589623780137" duration="3418000" />
-      <workItem from="1590232493811" duration="8560000" />
+      <workItem from="1590232493811" duration="9408000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34087000" />
+    <option name="totallyTimeSpent" value="34935000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -451,13 +446,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/patients.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="45" lean-forward="true" selection-start-line="5" selection-start-column="45" selection-end-line="5" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/inquiries.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -486,13 +474,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/includes/menu.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="91" selection-start-line="35" selection-start-column="91" selection-end-line="35" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/Authentication.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -514,20 +495,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="65" selection-start-line="16" selection-start-column="65" selection-end-line="16" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/Users.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="41" lean-forward="true" selection-start-line="13" selection-start-column="41" selection-end-line="13" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/MainController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -535,17 +502,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/users.php">
+    <entry file="file://$PROJECT_DIR$/frontend/includes/menu.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="596">
-          <caret line="145" column="125" selection-start-line="145" selection-start-column="125" selection-end-line="145" selection-end-column="125" />
+        <state relative-caret-position="437">
+          <caret line="31" column="40" lean-forward="true" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/styles.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
-          <caret line="243" column="34" selection-start-line="243" selection-start-column="34" selection-end-line="243" selection-end-column="34" />
+          <caret line="243" column="34" lean-forward="true" selection-start-line="243" selection-start-column="34" selection-end-line="243" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="65" selection-start-line="16" selection-start-column="65" selection-end-line="16" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/patients.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1015">
+          <caret line="83" column="34" lean-forward="true" selection-start-line="83" selection-start-column="34" selection-end-line="83" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/Users.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/users.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="42" column="101" lean-forward="true" selection-start-line="42" selection-start-column="101" selection-end-line="42" selection-end-column="101" />
         </state>
       </provider>
     </entry>
