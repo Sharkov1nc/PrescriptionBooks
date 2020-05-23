@@ -4,15 +4,21 @@ include_once 'Connection.php';
 class Users extends connection {
 
     public $company;
+    public  static $instance;
 
     public function __construct()
     {
         parent::__construct();
     }
 
+    public static function getInstance(){
+        self::$instance = new Users();
+        return self::$instance;
+    }
+
     public function getUsers(){
         $data = array();
-        $result  = $this->conn->query("SELECT users.id, users.username, users.email, positions.position FROM users INNER JOIN `positions` ON positions.id = users.position WHERE `position` != 1 ORDER BY users.id DESC");
+        $result  = $this->conn->query("SELECT users.id, users.fname, users.lname, users.email, `positions`.`position` FROM users INNER JOIN positions ON positions.id = users.user_position WHERE users.`user_position` != 1 ORDER BY users.id DESC");
         if($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
                 $data[] = $row;

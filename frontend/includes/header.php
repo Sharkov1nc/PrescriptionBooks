@@ -7,7 +7,7 @@
     <div class="col-10">
         <p class="page-title"><?= $pageTitle ?></p>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="?page=home">SharkSoft</a></li>
+            <li class="breadcrumb-item"><a href="index.php">SharkSoft</a></li>
             <li class="breadcrumb-item active" aria-current="page">
                 <?= $pageTitle ?>
             </li>

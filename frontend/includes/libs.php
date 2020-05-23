@@ -1,5 +1,6 @@
 <?php
     include_once '../backend/Authentication.php';
+    include_once '../backend/MainController.php';
     $authentication = new Authentication();
     $authentication->isLoggedIn();
 ?>

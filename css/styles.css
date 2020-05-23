@@ -237,26 +237,14 @@ table > .thead-dark > tr > .table-title {
     border-color: #ef6262 !important;
     text-align: center;
 }
-#profits-modal > .modal-dialog, #expenses-modal > .modal-dialog, #contracts-modal > .modal-dialog {
-    min-width: 900px;
+.modal-content {
+    background: rgba(0, 0, 0, 0.6);
 }
-#profits-modal .modal-header, #expenses-modal .modal-header, #contracts-modal .modal-header{
-    background-color: #ef6262;
-    color: #e1e1e1;
+.modal-header {
+    border-bottom: 1px solid #333;
 }
-#profits-modal .btn, #profits-modal button, #expenses-modal .btn, #expenses-modal button, #contracts-modal .btn, #contracts-modal button {
-    background-color: #ef6262;
-    border-color: #ef6262;
-    color: #e1e1e1;
-}
-#profits-modal .user-select-icon, #expenses-modal .user-select-icon, #contracts-modal .user-select-icon {
-    display: inline-block;
-    font-size: 30px;
-    vertical-align: middle;
-    margin-top: 4px;
-}
-#profits-modal .user-select, #expenses-modal .user-select, #contracts-modal .user-select {
-    margin-left: -40px;
+.modal-header .close {
+    color: #fff;
 }
 .img-avatar {
     width: 150px;
@@ -309,6 +297,18 @@ table > .thead-dark > tr > .table-title {
 }
 .avatar-container .description .mail {
     color: rgba(255, 255, 255, .5);
+}
+#user-modal .modal-dialog {
+    max-width: 550px;
+    margin-top: 120px;
+}
+.form-confirm-button {
+    background-color: rgba(255, 255, 255, .2);
+    color: #e1e1e1;
+}
+.form-confirm-button:hover {
+    background-color: #dc3545;
+    color: #fff;
 }
 
 

@@ -1,3 +1,22 @@
+CREATE TABLE `positions` (
+id int(8) NOT NULL AUTO_INCREMENT,
+position varchar(32) NOT NULL,
+PRIMARY KEY (id)
+)
+
+CREATE TABLE `users` (
+id int(8) NOT NULL AUTO_INCREMENT,
+email varchar(64) NOT NULL,
+fname varchar(64) NOT NULL,
+lname varchar(64) NOT NULL,
+password varchar(64) NOT NULL,
+eng int(10) NULL,
+user_position int(8) NOT NULL,
+date datetime NOT NULL,
+PRIMARY KEY (id),
+FOREIGN KEY (user_position) REFERENCES positions(id)
+)
+
 CREATE TABLE `prescription_books` (
 id int(8) NOT NULL AUTO_INCREMENT,
 patient_id int(8) NOT NULL,

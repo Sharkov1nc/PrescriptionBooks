@@ -1,8 +1,8 @@
 <?php
-include_once 'users.php'; // вмъкваме файла съдържащ класа Users
+include_once 'Users.php'; // вмъкваме файла съдържащ класа Users
 include_once 'Authentication.php'; // вмъкваме файла съдържащ класа Auth
 
-$auth = new Auth(); // създаваме нов обект от клас Auth
+$auth = new Authentication(); // създаваме нов обект от клас Auth
 $users = new Users(); // създаваме нов обект от клас Users
 
 if(isset($_POST['action'])){ // проверяваме дали имаме елемент action в масива $_POST

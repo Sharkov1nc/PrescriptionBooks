@@ -13,7 +13,7 @@
             <i class="s7-home"></i>
             <span class="item-menu-title">Начало</span>
         </a>
-        <?php if ($authentication->user->position == 1) { ?>
+        <?php if ($authentication->user->user_position == 1) { ?>
             <a href="users.php" class="list-group-item list-group-item-action">
                 <i class="s7-users"></i>
                 <span class="item-menu-title">Потребители</span>
@@ -23,7 +23,7 @@
                 <span class="item-menu-title">Запитвания</span>
             </a>
         <?php } ?>
-        <?php if ($authentication->user->position == 2) { ?>
+        <?php if ($authentication->user->user_position == 2) { ?>
             <a href="prescriptions_for_written.php" class="list-group-item list-group-item-action">
                 <i class="s7-bookmarks"></i>
                 <span class="item-menu-title">Рецепти за изписване</span>
@@ -33,7 +33,7 @@
                 <span class="item-menu-title">Пациенти</span>
             </a>
         <?php } ?>
-        <?php if ($authentication->user->position == 2 || $authentication->user->position == 3) { ?>
+        <?php if ($authentication->user->user_position == 2 || $authentication->user->user_position == 4) { ?>
             <a href="written_prescriptions.php" class="list-group-item list-group-item-action">
                 <i class="s7-note2"></i>
                 <span class="item-menu-title">Изписани рецепти</span>

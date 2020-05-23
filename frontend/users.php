@@ -1,4 +1,7 @@
-<?php $pageTitle = "Потребители"; ?>
+<?php
+$pageTitle = "Потребители";
+include_once  '../backend/Users.php'
+?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -15,7 +18,7 @@
                         <div class="col-12 main-content">
                             <div class="users-content">
                                 <div class=" row icon-menu-container">
-                                    <a data-toggle="modal" data-target="#user-data-modal" class="text-center box add-user">
+                                    <a data-toggle="modal" data-target="#user-modal" class="text-center box add-user">
                                         <i class="s7-add-user"></i>
                                         <p>Добавяне на потребител</p>
                                     </a>
@@ -37,6 +40,19 @@
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            <?php foreach (Users::getInstance()->getUsers() as $user) { ?>
+                                            <tr>
+                                                <th scope="col"><?= $user['id'] ?></th>
+                                                <th scope="col"><?= $user['fname'] . ' ' . $user['lname'] ?></th>
+                                                <th scope="col"><?= $user['email'] ?></th>
+                                                <th scope="col"><?= $user['position'] ?></th>
+                                                <th scope="col">
+                                                    <a id="'<?= $user['id'] ?>'" class="btn icon-button edit-expense"> <i class="s7-id"></i></a>
+                                                    <a id="'<?= $user['id'] ?>'" class="btn icon-button edit-expense"> <i class="s7-edit"></i></a>
+                                                    <a id="'<?= $user['id'] ?>'" class="btn icon-button edit-expense"> <i class="s7-trash"></i></a>
+                                                </th>
+                                            </tr>
+                                            <?php } ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -69,7 +85,7 @@
                                 </div>
                             </div>
 
-                            <div class="modal" id="user-data-modal">
+                            <div class="modal" id="user-modal">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
 
@@ -82,35 +98,52 @@
                                             <form action="../backend/user_ajax.php" method="post" id="users-form">
                                                 <div class="form-group form-row w-100">
                                                     <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label for="inputAddress">Потребителско име</label>
-                                                            <input type="text" id="username-field" class="form-control" name="username" placeholder="Въведете потребителско име">
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <div class="form-group">
+                                                                    <label>Име</label>
+                                                                    <input type="text" id="fname-field" class="form-control" name="fname" placeholder="Въведете име">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <div class="form-group">
+                                                                    <label>Фамилия</label>
+                                                                    <input type="text" id="lname-field" class="form-control" name="lname" placeholder="Въведете фамилия">
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="form-group">
-                                                            <label for="inputAddress">Имейл Адрес</label>
-                                                            <input type="text" id="email-field" class="form-control" name="email" placeholder="Въведете имейл адрес">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="inputAddress">Парола</label>
-                                                            <input type="text" id="password-field" class="form-control" name="password" placeholder="Въведете парола">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="inputAddress">Позиция</label>
-                                                            <select name="position" id="position-field" class="form-control">
-                                                                <?php $positions = $home->getPositions(); // извикваме метод, който зарежда позициите
-                                                                if($positions) {
-                                                                    foreach ($positions as $position) {
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <div class="form-group">
+                                                                    <label>ЕГН</label>
+                                                                    <input type="text" id="egn-field" class="form-control" name="egn" placeholder="Въведете енг">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <div class="form-group">
+                                                                    <label>Позиция</label>
+                                                                    <select name="position" id="position-field" class="form-control">
+                                                                        <?php foreach (MainController::getInstance()->getPositions() as $position) { ?>
+                                                                            <option value="<?= $position['id'] ?>"> <?= $position['position'] ?></option>
+                                                                            <?php
+                                                                        }
                                                                         ?>
-                                                                        <option value="<?= $position['id'] ?>"> <?= $position['position'] ?></option>
-                                                                        <?php
-                                                                    }
-                                                                }?>
-                                                            </select>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>E-mail адрес</label>
+                                                            <input type="text" id="email-field" class="form-control" name="email" placeholder="Въведете e-mail">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Парола</label>
+                                                            <input type="text" id="password-field" class="form-control" name="password" placeholder="Въведете парола">
                                                         </div>
                                                         <input type="hidden" name="user-id" id="user-id" value="0">
                                                         <input type="hidden" name="action" id="action" value="add">
-                                                        <div class="form-group mt-4">
-                                                            <button type="submit" id="submit-btn" class="btn btn-block btn-danger btn-lg">Добави Потребител</button>
+                                                        <div class="form-group mt-4 mb-0">
+                                                            <button type="submit" id="submit-btn" class="btn btn-block btn-lg form-confirm-button">Добави Потребител</button>
                                                         </div>
                                                     </div>
                                                 </div>
