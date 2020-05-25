@@ -6,15 +6,20 @@ class Authentication extends Connection {
 
     public $user;
 
-    protected function register($username, $password, $email, $position){
+    public function __construct()
+    {
+        parent::__construct();
+        if(isset($_SESSION['user']) && !$this->user){
+            $this->user = $_SESSION['user'];
+        }
+    }
 
+    protected function register($data){
         $date = new DateTime();
         $dateField = $date->format('Y-m-d H:i:s');
-        $this->conn->query("INSERT INTO users (username, password, email, `position`, `date`)  
-        VALUES('".$username."', '".$password."', '".$email."', ".md5($position).", '".$dateField."')");
-        if($position == 3 && !isset($_SESSION['user'])){
-            $this->login($email, $password);
-        }
+        $position = isset($data['position']) ? $data['position'] : 3;
+        $this->conn->query("INSERT INTO users (fname, lname, egn, email, password, `user_position`, `date`)  
+        VALUES('".$data['fname']."', '".$data['lname']."', '".$data['egn']."', '".$data['email']."', '".md5($data['password'])."', '".$position."', '".$dateField."')");
 
         return array(
             'status' => 1
@@ -44,8 +49,7 @@ class Authentication extends Connection {
     }
 
     public function isLoggedIn(){
-        if(isset($_SESSION['user']) && !$this->user){
-            $this->user = $_SESSION['user'];
+        if(isset($_SESSION['user'])){
             return;
         }
         header("Location: login.php");
@@ -57,36 +61,40 @@ class Authentication extends Connection {
         }
     }
 
-    public function validateRegister($username, $password, $passwordConfirm, $email, $position = 3){
+    public function validateRegister($data){
         $result = array(
             'status' => 1
         );
-        if(strlen($username) < 6) {
+        if(strlen($data['fname']) < 1) {
             $result['status'] = 0;
-            $result['message'] = 'Потебителското име трябва да е над 5 символа';
+            $result['message'] = 'Моля въведете име';
             return $result;
         }
-        if(strpos($email, '@') === false || strlen($email) < 6){
+        if(strlen($data['lname']) < 1) {
+            $result['status'] = 0;
+            $result['message'] = 'Моля въведете фамилия';
+            return $result;
+        }
+        if(strlen($data['egn']) < 1){
+            $result['status'] = 0;
+            $result['message'] = 'Моля въведете ЕГН';
+            return $result;
+        }
+        if(strpos($data['email'], '@') === false || strlen($data['email']) < 6){
             $result['status'] = 0;
             $result['message'] = 'Невалиден имейл';
             return $result;
         }
-        if(strlen($password) < 6){
+        if(strlen($data['password']) < 6){
             $result['status'] = 0;
             $result['message'] = 'Паролата трябва да е над 5 символа';
             return $result;
         }
-        if($password != $passwordConfirm){
-            $result['status'] = 0;
-            $result['message'] = 'Паролите не съвпадат';
-            return $result;
-        }
-
         if(!$result['status']){
             return $result;
         }
 
-        return $this->register($username, $password, $email, $position);
+        return $this->register($data);
     }
 
     public function validateLogin($email, $password){

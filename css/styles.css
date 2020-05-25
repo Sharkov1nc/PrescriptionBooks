@@ -310,6 +310,12 @@ table > .thead-dark > tr > .table-title {
     background-color: #dc3545;
     color: #fff;
 }
+.doctor-field-container {
+    display: none;
+}
+#search-modal {
+    margin-top: 120px;
+}
 
 
 

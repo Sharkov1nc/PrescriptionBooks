@@ -16,9 +16,21 @@ class Users extends connection {
         return self::$instance;
     }
 
-    public function getUsers(){
+    public function getUsers($type = null){
         $data = array();
-        $result  = $this->conn->query("SELECT users.id, users.fname, users.lname, users.email, `positions`.`position` FROM users INNER JOIN positions ON positions.id = users.user_position WHERE users.`user_position` != 1 ORDER BY users.id DESC");
+        $joinPosition = '';
+        $position = '';
+        if($type === 'doctors'){
+            $position = "AND users.`user_position` = 2";
+        } else if($type === 'patients') {
+            $position = "AND users.`user_position` = 3";
+        } else if($type === 'pharmacy') {
+            $position = "AND users.`user_position` = 4";
+        }
+        if(!$type){
+            $joinPosition = "INNER JOIN positions ON positions.id = users.user_position";
+        }
+        $result  = $this->conn->query("SELECT users.id, users.fname, users.lname, users.email, users.`date` ". ($joinPosition != '' ? ', `positions`.`position`' : '') ."  FROM users ". $joinPosition ." WHERE users.`user_position` != 1 ". $position ." ORDER BY users.id DESC");
         if($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
                 $data[] = $row;
@@ -29,7 +41,7 @@ class Users extends connection {
 
     public function getPatients(){
         $data = array();
-        $result  = $this->conn->query("SELECT * FROM users  WHERE user_position = 3 ORDER BY id DESC");
+        $result  = $this->conn->query("SELECT users.id, users.fname, users.lname, users.email, users.`date` FROM users  WHERE user_position = 3 ORDER BY id DESC");
         if($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
                 $data[] = $row;

@@ -1,16 +1,15 @@
 <?php
-include_once 'Users.php'; // вмъкваме файла съдържащ класа Users
-include_once 'Authentication.php'; // вмъкваме файла съдържащ класа Auth
+include_once 'Users.php';
+include_once 'Authentication.php';
 
-$auth = new Authentication(); // създаваме нов обект от клас Auth
-$users = new Users(); // създаваме нов обект от клас Users
+$auth = new Authentication();
+$users = new Users();
 
-if(isset($_POST['action'])){ // проверяваме дали имаме елемент action в масива $_POST
+if(isset($_POST['action'])){
 
-    if ($_POST['action'] == 'add'){ // проверяваме дали имаме елемент add в масива $_POST
-        // изивикваме метод validateRegister, който валидира въведените даннии и ако са валидни преминава към регистрация на потребител
-        $result = $auth->validateRegister($_POST['username'], $_POST['password'], $_POST['password'], $_POST['email'], $_POST['position']);
-        echo json_encode($result); // принтираме резултата от изпълнението на метода в кодиран json формат за да може ajax да го вземе
+    if ($_POST['action'] == 'add'){
+        $result = $auth->validateRegister($_POST);
+        echo json_encode($result);
     }
 
     if ($_POST['action'] == 'delete'){ // проверяваме дали имаме елемент delete в масива $_POST
