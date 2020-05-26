@@ -50,10 +50,19 @@ class Users extends connection {
         return $data;
     }
 
-    public function searchUser($username){
+    public function searchUser($userId = null, $fname = null, $lname = null){
         $data = array();
-
-        $result  = $this->conn->query("SELECT users.id, users.username, users.email, users.password, users.position as position_id, positions.position FROM users INNER JOIN `positions` ON positions.id = users.position WHERE (users.username LIKE '%".$username."%' OR users.id = ".intval($username).") AND `position` != 1 ");
+        $query = '';
+        if($userId){
+            $query = "SELECT users.id, users.fname, users.lname, users.email, users.egn, users.`date`, users.user_position as position_id, positions.position as `position` FROM users INNER JOIN `positions` ON positions.id = users.user_position WHERE users.id = ".$userId."  AND users.user_position != 1 ";
+        } else {
+            $lnameSearch = '';
+            if($lname){
+                $lnameSearch = " OR users.lname LIKE '%".$lname."%' ";
+            }
+            $query = "SELECT users.id, users.fname, users.lname, users.email, users.egn, users.`date`, users.user_position as position_id, positions.position as `position` FROM users INNER JOIN `positions` ON positions.id = users.user_position WHERE (users.fname LIKE '%".$fname."%' ". $lnameSearch .") AND users.user_position != 1 ";
+        }
+        $result  = $this->conn->query($query);
         if($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
                 $data[] = $row;
@@ -108,15 +117,14 @@ class Users extends connection {
 
 
     public function removeUser($userId){
-
-        $this->conn->query("DELETE FROM company_details WHERE user_id = ".intval($userId)."");
-        $this->conn->query("DELETE FROM users WHERE id=".intval($userId)."");
+        $this->conn->query("DELETE FROM prescription_books WHERE patient_id = ".intval($userId));
+        $this->conn->query("DELETE FROM users WHERE id=".intval($userId));
         $result = array(
             'status' => 1
         );
         if($this->conn->error){
             $result['status'] = 0;
-            $result['message'] = 'Не можете да изтриете потребител докато участва в приходи, разходи или договори';
+            $result['message'] = 'Не можете да изтриете потребителя';
         }
         return $result;
     }

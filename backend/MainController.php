@@ -20,4 +20,14 @@ class MainController extends Connection {
         return $data;
     }
 
+    public function getPositionById($positionId){
+        $positions = $this->getPositions();
+        foreach ($positions as $position){
+            if($position['id'] == $positionId){
+                return $position['position'];
+            }
+        }
+        return false;
+    }
+
 }

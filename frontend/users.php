@@ -42,16 +42,16 @@ include_once  '../backend/Users.php'
                                             </thead>
                                             <tbody>
                                             <?php foreach (Users::getInstance()->getUsers() as $key => $user) { ?>
-                                            <tr>
+                                            <tr id="user-<?= $user['id'] ?>">
                                                 <th scope="col"><?= ++$key ?></th>
                                                 <th scope="col"><?= $user['fname'] . ' ' . $user['lname'] ?></th>
                                                 <th scope="col"><?= $user['email'] ?></th>
                                                 <th scope="col"><?= $user['date'] ?></th>
                                                 <th scope="col"><?= $user['position'] ?></th>
                                                 <th scope="col">
-                                                    <a id="'<?= $user['id'] ?>'" class="btn icon-button edit-expense"> <i class="s7-id"></i></a>
-                                                    <a id="'<?= $user['id'] ?>'" class="btn icon-button edit-expense"> <i class="s7-edit"></i></a>
-                                                    <a id="'<?= $user['id'] ?>'" class="btn icon-button edit-expense"> <i class="s7-trash"></i></a>
+                                                    <a id="<?= $user['id'] ?>" data-action="show" class="btn icon-button info-user"> <i class="s7-id"></i></a>
+                                                    <a id="<?= $user['id'] ?>" data-action="edit" class="btn icon-button edit-user"> <i class="s7-edit"></i></a>
+                                                    <a id="<?= $user['id'] ?>" class="btn icon-button remove-user"> <i class="s7-trash"></i></a>
                                                 </th>
                                             </tr>
                                             <?php } ?>
@@ -73,7 +73,7 @@ include_once  '../backend/Users.php'
                                             <form class="form-inline" action="../backend/user_ajax.php" method="get" id="user-search">
                                                 <div class="form-group form-row w-100 m-0">
                                                     <div class="col-9">
-                                                        <input type="text" class="form-control w-100" name="username" id="user-search" placeholder="Въведете име и фамилия">
+                                                        <input type="text" class="form-control w-100" name="names" id="user-search" placeholder="Въведете име и фамилия">
                                                     </div>
                                                     <div class="col-3">
                                                         <button class="btn btn-success w-100">Търси</button>
@@ -148,7 +148,7 @@ include_once  '../backend/Users.php'
                                                             <label>E-mail адрес</label>
                                                             <input type="text" id="email-field" class="form-control" name="email" placeholder="Въведете e-mail">
                                                         </div>
-                                                        <div class="form-group">
+                                                        <div class="form-group password-container">
                                                             <label>Парола</label>
                                                             <input type="text" id="password-field" class="form-control" name="password" placeholder="Въведете парола">
                                                         </div>

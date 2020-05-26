@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once 'Connection.php';
+include_once 'MainController.php';
 
 class Authentication extends Connection {
 
@@ -22,7 +23,15 @@ class Authentication extends Connection {
         VALUES('".$data['fname']."', '".$data['lname']."', '".$data['egn']."', '".$data['email']."', '".md5($data['password'])."', '".$position."', '".$dateField."')");
 
         return array(
-            'status' => 1
+            'status' => 1,
+            'user' => [
+                'id' => $this->conn->insert_id,
+                'fname' => $data['fname'],
+                'lname' => $data['lname'],
+                'email' => $data['email'],
+                'date' => $dateField,
+                'position' => MainController::getInstance()->getPositionById($position)
+            ]
         );
     }
 
