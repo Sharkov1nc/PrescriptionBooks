@@ -24,17 +24,22 @@ $(document).ready(function(){
             success: function (data) {
                 data = JSON.parse(data);
                 if (data.status){
-                    tr = '<tr id="user-'+ data.user.id +'"> ' +
-                        '<th class="id-th">'+ (tBody[0].rows.length + 1) +'</th>' +
-                        ' <td>'+ data.user.fname + ' ' + data.user.lname +'</td>' +
-                        ' <td>'+ data.user.email +'</td>' +
-                        ' <td>'+ data.user.date +'</td>' +
-                        ' <td>'+ data.user.position +'</td>' +
-                        ' <td class="action-column">' +
-                        ' <a class="btn icon-button info-user" id="'+ data.user.id +'" data-action="show"> <i class="s7-id"></i></a>' +
-                        ' <a class="btn icon-button edit-user" id="'+ data.user.id +'" data-action="edit"> <i class="s7-edit"></i></a> ' +
-                        ' <a class="btn icon-button remove-user" id="'+ data.user.id +'"> <i class="s7-trash"></i></a> </td> </tr>';
-                    tBody.append(tr);
+                    if(data.changes){
+                        $('#user-'+ data.changes.user_id + ' .col-name').text(data.changes.fname + ' ' + data.changes.lname);
+                        $('#user-'+ data.changes.user_id + ' .col-email').text(data.changes.email);
+                    } else {
+                        tr = '<tr id="user-' + data.user.id + '"> ' +
+                            '<th class="id-th">' + (tBody[0].rows.length + 1) + '</th>' +
+                            ' <td class="col-name">' + data.user.fname + ' ' + data.user.lname + '</td>' +
+                            ' <td class="col-email">' + data.user.email + '</td>' +
+                            ' <td>' + data.user.date + '</td>' +
+                            ' <td>' + data.user.position + '</td>' +
+                            ' <td>' +
+                            ' <a class="btn icon-button info-user" id="' + data.user.id + '" data-action="show"> <i class="s7-id"></i></a>' +
+                            ' <a class="btn icon-button edit-user" id="' + data.user.id + '" data-action="edit"> <i class="s7-edit"></i></a> ' +
+                            ' <a class="btn icon-button remove-user" id="' + data.user.id + '"> <i class="s7-trash"></i></a> </td> </tr>';
+                        tBody.append(tr);
+                    }
                     $('#user-modal').modal('hide');
                 } else {
                     errorHandler(data.message);
@@ -76,11 +81,11 @@ $(document).ready(function(){
                     $.each(data, function(key, user){
                         tr = '<tr id="user-'+ user.id +'"> ' +
                             '<th class="id-th">'+ (tBody[0].rows.length + 1) +'</th>' +
-                            ' <td>'+ user.fname + ' ' + user.lname +'</td>' +
-                            ' <td>'+ user.email +'</td>' +
+                            ' <td class="col-name">'+ user.fname + ' ' + user.lname +'</td>' +
+                            ' <td class="col-email">'+ user.email +'</td>' +
                             ' <td>'+ user.date +'</td>' +
                             ' <td>'+ user.position +'</td>' +
-                            ' <td class="action-column">' +
+                            ' <td>' +
                             ' <a class="btn icon-button info-user" id="'+ user.id +'" data-action="show"> <i class="s7-id"></i></a>' +
                             ' <a class="btn icon-button edit-user" id="'+ user.id +'" data-action="edit"> <i class="s7-edit"></i></a> ' +
                             ' <a class="btn icon-button remove-user" id="'+ user.id +'"> <i class="s7-trash"></i></a> </td> </tr>';
@@ -119,7 +124,7 @@ $(document).ready(function(){
                     $(".password-container").css('display', 'none');
                     $("#action").val("edit");
                     $("#user-id").val(data[0].id);
-                    $('#position-field').val(data[0].position_id).prop('disabled', false);
+                    $('#position-field').val(data[0].position_id).prop('disabled', 'disabled');
                     $("#submit-btn").css('display','block');
                     $("#submit-btn").text("Редактирай");
                 }
@@ -128,22 +133,18 @@ $(document).ready(function(){
         })
     });
 });
-//
-// // Създаваме event listener, който следи за натискане на бутона за редактиране и преглед на потребител, при натискане на бутона се изпраща
-// // ajax заявка, която получава и зарежда данните за потребителя
-//
-// // Създаваме event listener, който следи за натискане на бутона за добавяне на потребител и извиква метод за изчистване
-// // на данните от формата и връщането им в първоначалния вид
-// $(document).on('click', '.add-user' , function() {
-//     clearForm(); // извикваме метода за зачистване и връщането на данните от формата в първоначалния им вид
-// });
-//
-// // метод за изчистване и връщане на данни от формата в първоначалния им вид
-// let clearForm = () => {
-//     $(".modal-title").text('Добавяне на потребител');
-//     $("input[type=text]").val("").removeAttr("readonly");
-//     $("#submit-btn").css('display','block');
-//     $("#submit-btn").text("Добави потребител");
-//     $("#form-action").val("add");
-//     $("#user-id").val("");
-// };
+
+$(document).on('click', '.add-user' , function() {
+    clearForm();
+});
+
+let clearForm = () => {
+    $(".modal-title").text('Добавяне на потребител');
+    $("input[type=text]").val("").removeAttr("readonly");
+    $("#submit-btn").css('display','block');
+    $('.doctor-field-container').css('display', 'none');
+    $(".password-container").css('display', 'block');
+    $("#submit-btn").text("Добави потребител");
+    $("#form-action").val("add");
+    $("#user-id").val("");
+};

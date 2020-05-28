@@ -54,7 +54,7 @@ class Users extends connection {
         $data = array();
         $query = '';
         if($userId){
-            $query = "SELECT users.id, users.fname, users.lname, users.email, users.egn, users.`date`, users.user_position as position_id, positions.position as `position` FROM users INNER JOIN `positions` ON positions.id = users.user_position WHERE users.id = ".$userId."  AND users.user_position != 1 ";
+            $query = "SELECT users.id, users.fname, users.lname, users.email, users.egn, users.`date`, users.user_position as position_id, positions.position as `position`, prescription_books.doctor_id as doctor FROM users INNER JOIN `positions` ON positions.id = users.user_position LEFT JOIN prescription_books ON users.id = prescription_books.patient_id WHERE users.id = ".$userId."  AND users.user_position != 1 ";
         } else {
             $lnameSearch = '';
             if($lname){
@@ -72,46 +72,45 @@ class Users extends connection {
         return $data;
     }
 
-    public function editUser($username, $email, $password, $position = null, $egn = null, $userId){
+    public function editUser($data){
         $result = array(
             'status' => 1
         );
-        if(strlen($username) < 6){
+        if(strlen($data['fname']) < 1) {
             $result['status'] = 0;
-            $result['message'] = 'Потебителското име трябва да е над 5 символа';
+            $result['message'] = 'Моля въведете име';
             return $result;
         }
-        if(strpos($email, '@') === false || strlen($email) < 6){
+        if(strlen($data['lname']) < 1) {
+            $result['status'] = 0;
+            $result['message'] = 'Моля въведете фамилия';
+            return $result;
+        }
+        if(strlen($data['egn']) < 1){
+            $result['status'] = 0;
+            $result['message'] = 'Моля въведете ЕГН';
+            return $result;
+        }
+        if(strpos($data['email'], '@') === false || strlen($data['email']) < 6){
             $result['status'] = 0;
             $result['message'] = 'Невалиден имейл';
             return $result;
         }
-        if(strlen($password) < 6){
+
+        $this->conn->query("UPDATE users SET fname = '".$data['fname']."', lname = '".$data['lname']."', email = '".$data['email']."', egn = '".$data['egn']."' WHERE id =" . $data['user_id']);
+        if($this->conn->error){
             $result['status'] = 0;
-            $result['message'] = 'Паролата трябва да е над 5 символа';
+            $result['message'] = 'Възникна грешка, моля опитайте отново по-късно';
             return $result;
+        } else {
+            $result['changes'] = [
+                'fname' => $data['fname'],
+                'lname' => $data['lname'],
+                'email' => $data['email'],
+                'egn' => $data['egn'],
+                'user_id' => $data['user_id']
+            ];
         }
-        if ($egn && strlen($egn) < 6) {
-            $result['status'] = 0;
-            $result['message'] = 'Невалиден единен граждански номер';
-            return $result;
-        }
-
-        $updateQ = "UPDATE users SET username = '".$username."', email = '".$email."', password = '".$password."'";
-        if($position){
-            $updateQ .= ' ,position = '.$position;
-        }
-        if($egn){
-            $updateQ .= ' ,egn = '.$egn;
-            $_SESSION['user']->egn = $egn;
-        }
-        $updateQ.= ' WHERE id = '.$userId;
-
-        $this->conn->query($updateQ);
-        $_SESSION['user']->password = $password;
-        $_SESSION['user']->username = $username;
-        $_SESSION['user']->email = $email;
-
         return $result;
     }
 

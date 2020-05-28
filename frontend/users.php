@@ -44,8 +44,8 @@ include_once  '../backend/Users.php'
                                             <?php foreach (Users::getInstance()->getUsers() as $key => $user) { ?>
                                             <tr id="user-<?= $user['id'] ?>">
                                                 <th scope="col"><?= ++$key ?></th>
-                                                <th scope="col"><?= $user['fname'] . ' ' . $user['lname'] ?></th>
-                                                <th scope="col"><?= $user['email'] ?></th>
+                                                <th scope="col" class="col-name"><?= $user['fname'] . ' ' . $user['lname'] ?></th>
+                                                <th scope="col" class="col-email"><?= $user['email'] ?></th>
                                                 <th scope="col"><?= $user['date'] ?></th>
                                                 <th scope="col"><?= $user['position'] ?></th>
                                                 <th scope="col">

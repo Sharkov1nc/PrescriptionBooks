@@ -21,11 +21,15 @@ class Authentication extends Connection {
         $position = isset($data['position']) ? $data['position'] : 3;
         $this->conn->query("INSERT INTO users (fname, lname, egn, email, password, `user_position`, `date`)  
         VALUES('".$data['fname']."', '".$data['lname']."', '".$data['egn']."', '".$data['email']."', '".md5($data['password'])."', '".$position."', '".$dateField."')");
+        $userId = $this->conn->insert_id;
+        if($position == 3){
+            $this->conn->query("INSERT INTO prescription_books(patient_id, doctor_id, `date`) VALUES(".$userId.", ".$data['doctor'].", '".$dateField."')");
+        }
 
         return array(
             'status' => 1,
             'user' => [
-                'id' => $this->conn->insert_id,
+                'id' => $userId,
                 'fname' => $data['fname'],
                 'lname' => $data['lname'],
                 'email' => $data['email'],
@@ -131,48 +135,6 @@ class Authentication extends Connection {
             $password = $arr['password'];
         }
         return $password; // връщаме паролата
-    }
-
-    public function passwordRecovery($email){
-        include_once "../bootstrap/PHPMailer/PHPMailerAutoload.php";
-
-        $password = $this->getUserPassword($email);
-
-        if(!$password){
-            $result = array(
-                'status' => 0,
-                'message' => 'Не е намерен потребител с този имейл адрес'
-            );
-            return $result;
-        }
-        $mail = new PHPMailer();
-        $mail->Mailer = "mail";
-        $mail->Host = "smtp.gmail.com";
-        $mail->SMTPAuth = true;
-        $mail->SMTPSecure = "tls";
-        $mail->Port = 587;
-        $mail->Username = "betafinanspld@gmail.com";
-        $mail->Password = 'betafinans3';
-        $mail->CharSet = "UTF-8";
-        $mail->setFrom("betafinanspld@gmail.com" , "Beta Finans");
-        $mail->AddAddress($email);
-        $mail->isHTML(true);
-        $mail->Subject = "Забравена парола";
-        $mail->Body = " Вашата парола е :". $password ." <br>
-					    Можете да влезете в акаунта си от : <a href='http://localhost/accountingSoftware/' >Тук</a>";
-        if(!$mail->Send())
-        {
-            $result = array(
-                'status' => 0,
-                'message' => 'Възникна грешка, моля опитайте отново по-късно'
-           );
-        } else {
-            $result = array(
-                'status' => 1,
-                'message' => 'Паролата ви е изпратена успешно'
-            );
-        }
-        return $result;
     }
 
 }

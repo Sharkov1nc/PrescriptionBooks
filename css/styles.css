@@ -191,7 +191,6 @@ table {
     color: #e1e1e1 !important;
 }
 table > tbody > tr > td {
-    padding: 7px !important;
     vertical-align: middle !important;
 }
 table > .thead-dark > tr > th {

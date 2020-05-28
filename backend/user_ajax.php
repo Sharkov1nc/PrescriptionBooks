@@ -17,11 +17,10 @@ if(isset($_POST['action'])){
         echo json_encode($result);
     }
 
-//    if($_POST['action'] == 'edit'){
-//        $egn = isset($_POST['egn']) ? $_POST['egn'] : null;
-//        $result = $users->editUser($_POST['username'], $_POST['email'], $_POST['password'], $_POST['position'], $egn, $_POST['user-id']);
-//        echo json_encode($result);
-//    }
+    if($_POST['action'] == 'edit'){
+        $result = $users->editUser($_POST);
+        echo json_encode($result);
+    }
 
 } else if (isset($_GET['action'])) {
 
