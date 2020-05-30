@@ -19,7 +19,7 @@
                                         <i class="s7-users"></i>
                                         <p>Потребители</p>
                                     </a>
-                                    <a href="inquiries.php" class="text-center box">
+                                    <a href="drugs.php" class="text-center box">
                                         <i class="s7-mail-open"></i>
                                         <p>Запитвания</p>
                                     </a>

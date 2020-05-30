@@ -18,9 +18,9 @@
                 <i class="s7-users"></i>
                 <span class="item-menu-title">Потребители</span>
             </a>
-            <a href="inquiries.php" class="list-group-item list-group-item-action">
-                <i class="s7-mail-open"></i>
-                <span class="item-menu-title">Запитвания</span>
+            <a href="drugs.php" class="list-group-item list-group-item-action">
+                <i class="s7-eyedropper"></i>
+                <span class="item-menu-title">Лекарства</span>
             </a>
         <?php } ?>
         <?php if ($authentication->user->user_position == 2) { ?>

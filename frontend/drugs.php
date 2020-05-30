@@ -1,9 +1,9 @@
-<?php $pageTitle = "Запитвания"; ?>
+<?php $pageTitle = "Лекарства"; ?>
 <!doctype html>
 <html lang="en">
 <head>
     <?php include_once  'includes/libs.php'; ?>
-    <script src="../js/inquiries.js"></script>
+    <script src="../js/drugs.js"></script>
 </head>
 <body>
 <div class="container-fluid">

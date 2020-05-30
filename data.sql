@@ -54,13 +54,3 @@ PRIMARY KEY (id),
 FOREIGN KEY (recipe_id) REFERENCES recipe(id),
 FOREIGN KEY (drug_id) REFERENCES drugs(id)
 )
-
-CREATE TABLE `inquiries` (
-id int(8) NOT NULL AUTO_INCREMENT,
-inquiry varchar(512) NOT NULL,
-reply varchar(512) NULL,
-user_id int(8) NOT NULL,
-date datetime NOT NULL,
-PRIMARY KEY (id),
-FOREIGN KEY (user_id) REFERENCES users(id)
-)
