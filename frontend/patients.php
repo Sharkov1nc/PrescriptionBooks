@@ -68,7 +68,7 @@ include_once '../backend/Users.php';
                                 </div>
 
                                 <div class="modal-body">
-                                    <form class="form-inline" action="../backend/user_ajax.php" method="get" id="user-search">
+                                    <form class="form-inline" action="../backend/users_controller.php" method="get" id="user-search">
                                         <div class="form-group form-row w-100">
                                             <div class="col-9">
                                                 <input type="text" class="form-control w-100" name="username" id="user-search" placeholder="Въведете потребителско име">
@@ -95,7 +95,7 @@ include_once '../backend/Users.php';
                                 </div>
 
                                 <div class="modal-body">
-                                    <form action="../backend/user_ajax.php" method="post" id="users-form">
+                                    <form action="../backend/users_controller.php" method="post" id="users-form">
                                         <div class="form-group form-row w-100">
                                             <div class="col-12">
                                                 <div class="row">

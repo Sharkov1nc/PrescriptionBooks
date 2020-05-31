@@ -41,7 +41,7 @@ FOREIGN KEY (prescription_book_id) REFERENCES prescription_books(id)
 
 CREATE TABLE `drugs` (
 id int(8) NOT NULL AUTO_INCREMENT,
-`name` varchar (128) NOT NULL,
+`name` varchar (128) unique NOT NULL,
 PRIMARY KEY (id)
 )
 

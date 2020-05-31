@@ -1,4 +1,7 @@
-<?php $pageTitle = "Лекарства"; ?>
+<?php
+include_once '../backend/PrescriptionsBooks.php';
+$pageTitle = "Лекарства";
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,15 +16,15 @@
         <div class="col-10 page-content">
             <div class="row">
                 <div class="col-12 main-content">
-                    <div class="users-content">
-                        <div class=" row icon-menu-container">
-                            <a data-toggle="modal" data-target="#user-data-modal" class="text-center box add-user">
-                                <i class="s7-add-user"></i>
-                                <p>Добавяне на потребител</p>
+                    <div class="drugs-content">
+                        <div class="row icon-menu-container">
+                            <a class="text-center box excel-import-button">
+                                <i class="s7-server"></i>
+                                <p>Импортирай лекарства от Excel</p>
                             </a>
                             <a data-toggle="modal" data-target="#search-modal" class="text-center box">
                                 <i class="s7-search"></i>
-                                <p>Търсене на потребител</p>
+                                <p>Търсене на лекарство</p>
                             </a>
                         </div>
                         <div class="row table-container">
@@ -30,17 +33,28 @@
                                     <thead class="thead-dark">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Име и фамилия</th>
-                                        <th scope="col">Имейл адрес</th>
-                                        <th scope="col">Позиция</th>
+                                        <th scope="col">Име на лекарство</th>
                                         <th scope="col">Действия</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                        <?php foreach (PrescriptionsBooks::getInstance()->getDrugs() as $key => $drug) { ?>
+                                        <tr>
+                                            <th><?= $key+1 ?></th>
+                                            <th><?= $drug['name'] ?></th>
+                                            <th>
+                                                <a id="<?= $drug['id'] ?>" class="btn icon-button edit-drug"> <i class="s7-edit"></i></a>
+                                                <a id="<?= $drug['id'] ?>" class="btn icon-button remove-drug"> <i class="s7-trash"></i></a>
+                                            </th>
+                                        </tr>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+                        <form action="../backend/prescriptions_controller.php" method="POST" id="excel-import" class="d-none" enctype="multipart/form-data">
+                            <input type="file" name="drugs_excel" id="file" accept=".xls,.xlsx">
+                        </form>
                     </div>
                 </div>
             </div>

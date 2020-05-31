@@ -20,8 +20,8 @@
                                         <p>Потребители</p>
                                     </a>
                                     <a href="drugs.php" class="text-center box">
-                                        <i class="s7-mail-open"></i>
-                                        <p>Запитвания</p>
+                                        <i class="s7-eyedropper"></i>
+                                        <p>Лекарства</p>
                                     </a>
                                 <?php } ?>
                                 <?php if ($authentication->user->user_position == 2) { ?>

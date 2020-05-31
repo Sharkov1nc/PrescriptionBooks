@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
 
     let form = $('#users-form');
@@ -52,7 +51,7 @@ $(document).ready(function(){
         let userId = this.id;
         $.ajax({
             type: "POST",
-            url: "../backend/user_ajax.php",
+            url: "../backend/users_controller.php",
             data: {action: "delete", user_id : userId},
             success: function (data) {
                 data = JSON.parse(data);
@@ -101,7 +100,7 @@ $(document).ready(function(){
         let userId = this.id;
         let action = this.dataset.action;
         $.ajax({
-            url:"../backend/user_ajax.php",
+            url:"../backend/users_controller.php",
             method:"GET",
             data:{action: 'search', user_id: userId},
             success:function(data){

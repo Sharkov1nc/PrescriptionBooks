@@ -3,7 +3,6 @@ include_once 'Connection.php';
 
 class Users extends connection {
 
-    public $company;
     public  static $instance;
 
     public function __construct()
