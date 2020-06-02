@@ -213,6 +213,7 @@ table .id-th {
 }
 table th, table td {
     border-top: 1px solid rgba(0,0,0,.13) !important;
+    vertical-align: unset !important;
 }
 .icon-button {
     text-align: center;
@@ -312,7 +313,7 @@ table > .thead-dark > tr > .table-title {
 .doctor-field-container {
     display: none;
 }
-#search-modal {
+#search-modal, #add-drug-modal {
     margin-top: 120px;
 }
 
