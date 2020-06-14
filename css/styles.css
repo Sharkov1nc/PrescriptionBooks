@@ -316,6 +316,50 @@ table > .thead-dark > tr > .table-title {
 #search-modal, #add-drug-modal {
     margin-top: 120px;
 }
+.prescription-for-written-content .badge {
+    font-size: 12px;
+    padding: 5px 8px;
+}
+#add-prescription-modal .modal-dialog {
+    max-width: 750px;
+}
+.drugs-select .list-group, #selected-drugs {
+    height: 150px;
+    max-height: 150px;
+    background-color: #fff;
+    overflow-y: scroll;
+    border-radius: .25em;
+}
+.drugs-select .list-group .list-group-item {
+    height: 40px;
+    line-height: 15px;
+    border: none;
+    border-bottom: 1.5px solid #f3f3f3;
+    color: #333;
+}
+.drugs-select .list-group input {
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    font-family: Nunito,sans-serif !important;
+    border: 1px solid #f3f3f3;
+    border-bottom: 1px solid #ccc;
+    font-size: 15px;
+    padding-left: 18px;
+    line-height: 40px;
+    color: #333;
+}
+.drugs-select .list-group input:focus {
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.badge-drugs {
+    padding: 5px 8px;
+    font-size: 13px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    color: #333;
+}
 
 
 
