@@ -31,8 +31,8 @@ CREATE TABLE `recipe` (
 id int(8) NOT NULL AUTO_INCREMENT,
 prescription_book_id int(8) NOT NULL,
 date datetime NOT NULL,
-received_date datetime NOT NULL,
-pharmacist_id int(8) NOT NULL,
+received_date datetime NULL,
+pharmacist_id int(8) NULL,
 additinal_information varchar(512) NULL,
 PRIMARY KEY (id),
 FOREIGN KEY (pharmacist_id) REFERENCES users(id),
@@ -46,7 +46,7 @@ date datetime NOT NULL,
 PRIMARY KEY (id)
 )
 
-CREATE TABLE `reciple_drugs` (
+CREATE TABLE `recipe_drugs` (
 id int(8) NOT NULL AUTO_INCREMENT,
 recipe_id int(8) NOT NULL,
 drug_id int(8) NOT NULL,

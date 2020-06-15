@@ -42,9 +42,9 @@ $pageTitle = "Рецепти за изписване";
                                     </thead>
                                     <tbody>
                                     <?php foreach (PrescriptionBooks::getInstance()->getPrescriptionsForWritten() as $key => $pb) { ?>
-                                    <tr>
+                                    <tr id="prescrition-row-<?= $pb['id'] ?>">
                                         <th><?= $key+1 ?></th>
-                                        <th><?= $pb['fname'] . ' ' . $pb['lname'] ?></th>
+                                        <th><?= $pb['user_fname'] . ' ' . $pb['user_lname'] ?></th>
                                         <th> <?php if(!$pb['recipe_id']) { ?>
                                                 <span class="badge badge-info">Няма изписани рецепти</span></th>
                                             <? } else { ?>
@@ -52,8 +52,8 @@ $pageTitle = "Рецепти за изписване";
                                         <?php } ?>
                                         <th><?= $pb['recipe_date'] ?></th>
                                         <th>
-                                            <a id="<?= $pb['id'] ?>" class="btn icon-button view-user"> <i class="s7-user"></i></a>
-                                            <a id="<?= $pb['id'] ?>" class="btn icon-button add-prescription" data-toggle="modal" data-target="#add-prescription-modal"> <i class="s7-note"></i></a>
+                                            <a data-user_id="<?= $pb['user_id'] ?>" class="btn icon-button view-user"> <i class="s7-user"></i></a>
+                                            <a id="<?= $pb['id'] ?>" data-user="<?= $pb['user_fname'] . ' ' . $pb['user_lname'] ?>" class="btn icon-button add-prescription" data-toggle="modal" data-target="#add-prescription-modal"> <i class="s7-note"></i></a>
                                         </th>
                                     </tr>
                                     <?php } ?>
@@ -73,7 +73,7 @@ $pageTitle = "Рецепти за изписване";
                                     <form action="../backend/prescriptions_controller.php" id="add-prescription-form" method="post">
                                         <div class="form-group">
                                             <label>Пациент:</label>
-                                            <input id="patient-name" type="text" name="name" class="form-control" value="Александър Авренчев" readonly>
+                                            <input id="patient-name" type="text" class="form-control" value="Александър Авренчев" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label>Избрани лекарства:</label>

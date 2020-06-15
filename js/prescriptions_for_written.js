@@ -1,7 +1,16 @@
 $(document).ready(function() {
     let drugs = $(".drugs-select .list-group-item.drugs-item");
     let selectedDrugsContainer = $("#selected-drugs");
-    var selectedDrugs = [];
+    let addPrescriptionModal = $("#add-prescription-modal");
+    let addPrescriptionForm = $("#add-prescription-form");
+    let selectedDrugs = [];
+    let prescriptionBookId = null;
+
+    $(".add-prescription").on("click", function () {
+        prescriptionBookId = this.id;
+        $("#patient-name").val(this.dataset.user);
+    });
+
     $("#live-search").on('keyup', function(){
         if($(this).val() !== ''){
             let val = $(this).val().toLowerCase();
@@ -30,17 +39,46 @@ $(document).ready(function() {
                 isDrugExists = true;
             }
         });
-
         if(!isDrugExists){
-                selectedDrugsContainer.append("<div class='badge badge-light badge-drugs' id='" + this.id + "'>" + $(this).text() + "</div>");
-                selectedDrugs.push({
-                    id: drugId,
-                    quantity: 1,
-                    name: $(this).text()
-                });
-            }
-        console.log(selectedDrugs);
+            selectedDrugsContainer.append("<div class='badge badge-light badge-drugs' id='" + this.id + "'>" + $(this).text() + "</div>");
+            selectedDrugs.push({
+                id: drugId,
+                quantity: 1,
+                name: $(this).text()
+            });
+        }
     });
 
+    selectedDrugsContainer.on('click', '.badge-drugs', function () {
+        let drug = this;
+        $.each(selectedDrugs, function(key, val) {
+            if (val && val.id == drug.id) {
+                selectedDrugs.splice(key, 1);
+                drug.remove();
+            }
+        });
+    });
+
+    addPrescriptionModal.on("hidden.bs.modal", function () {
+        selectedDrugsContainer.empty();
+        selectedDrugs = [];
+    });
+
+    addPrescriptionForm.on('submit', function (e) {
+        e.preventDefault();
+        let additionalInfo = $(this).find('textarea[name="additional_information"]').val();
+        $.ajax({
+            type: addPrescriptionForm.attr('method'),
+            url: addPrescriptionForm.attr('action'),
+            data: {prescription_id: prescriptionBookId, additional_info: additionalInfo, drugs: selectedDrugs, action: 'add_prescription'},
+            success: function (data) {
+                data = JSON.parse(data);
+                if(data.status){
+                    addPrescriptionModal.modal('hide');
+                    $("#prescrition-row-" + prescriptionBookId).remove();
+                }
+            }
+        });
+    });
 
 });
