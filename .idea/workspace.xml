@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5db6e07-e8c5-4876-b700-1a84690f53a1" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/PrescriptionBooks.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/PrescriptionBooks.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/prescriptions_controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/prescriptions_controller.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/prescriptions_for_written.php" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/prescriptions_for_written.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/written_prescriptions.php" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/written_prescriptions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/prescriptions_for_written.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/prescriptions_for_written.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/written_prescriptions.php.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/written_prescriptions.php.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,17 +30,26 @@
       <file leaf-file-name="PrescriptionBooks.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/PrescriptionBooks.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-112">
-              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+            <state relative-caret-position="255">
+              <caret line="81" column="5" lean-forward="true" selection-start-line="81" selection-start-column="5" selection-end-line="81" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="prescriptions_for_written.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/prescriptions_for_written.php">
+      <file leaf-file-name="written_prescriptions.php.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/js/written_prescriptions.php.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="762">
-              <caret line="75" column="102" selection-start-line="75" selection-start-column="102" selection-end-line="75" selection-end-column="102" />
+            <state relative-caret-position="60">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="written_prescriptions.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/written_prescriptions.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="194">
+              <caret line="44" column="47" selection-start-line="44" selection-start-column="47" selection-end-line="44" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -47,17 +57,8 @@
       <file leaf-file-name="prescriptions_controller.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/prescriptions_controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="prescriptions_for_written.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/js/prescriptions_for_written.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+            <state relative-caret-position="240">
+              <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -151,15 +152,15 @@
         <option value="$PROJECT_DIR$/backend/Drugs.php" />
         <option value="$PROJECT_DIR$/js/drugs.js" />
         <option value="$PROJECT_DIR$/backend/Authentication.php" />
-        <option value="$PROJECT_DIR$/frontend/written_prescriptions.php" />
-        <option value="$PROJECT_DIR$/js/written_prescriptions.php.js" />
         <option value="$PROJECT_DIR$/css/styles.css" />
         <option value="$PROJECT_DIR$/data.sql" />
-        <option value="$PROJECT_DIR$/backend/prescriptions_controller.php" />
         <option value="$PROJECT_DIR$/backend/Users.php" />
         <option value="$PROJECT_DIR$/backend/PrescriptionBooks.php" />
+        <option value="$PROJECT_DIR$/backend/prescriptions_controller.php" />
+        <option value="$PROJECT_DIR$/frontend/written_prescriptions.php" />
         <option value="$PROJECT_DIR$/frontend/prescriptions_for_written.php" />
         <option value="$PROJECT_DIR$/js/prescriptions_for_written.js" />
+        <option value="$PROJECT_DIR$/js/written_prescriptions.php.js" />
       </list>
     </option>
   </component>
@@ -269,12 +270,12 @@
       <workItem from="1590956425858" duration="3000" />
       <workItem from="1591126021555" duration="6329000" />
       <workItem from="1591291957272" duration="103000" />
-      <workItem from="1591821726914" duration="29293000" />
+      <workItem from="1591821726914" duration="31094000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="97798000" />
+    <option name="totallyTimeSpent" value="99599000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -285,7 +286,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.27878788" />
+      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.27878788" />
       <window_info anchor="right" id="Remote Host" order="3" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20457797" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -494,27 +495,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/written_prescriptions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11">
-          <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="21" column="80" lean-forward="true" selection-start-line="21" selection-start-column="80" selection-end-line="21" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/written_prescriptions.php.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/styles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="345" column="20" lean-forward="true" selection-start-line="345" selection-start-column="20" selection-end-line="345" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -553,13 +537,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="37" lean-forward="true" selection-start-line="3" selection-start-column="37" selection-end-line="3" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/users.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="347">
@@ -574,31 +551,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/PrescriptionBooks.php">
+    <entry file="file://$PROJECT_DIR$/js/users.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-112">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        <state relative-caret-position="206">
+          <caret line="60" column="47" lean-forward="true" selection-start-line="60" selection-start-column="47" selection-end-line="60" selection-end-column="47" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/prescriptions_controller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        <state relative-caret-position="240">
+          <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/prescriptions_for_written.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="762">
-          <caret line="75" column="102" selection-start-line="75" selection-start-column="102" selection-end-line="75" selection-end-column="102" />
+        <state relative-caret-position="-1012">
+          <caret line="39" column="57" lean-forward="true" selection-start-line="39" selection-start-column="57" selection-end-line="39" selection-end-column="57" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/prescriptions_for_written.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+        <state relative-caret-position="113">
+          <caret line="93" column="40" lean-forward="true" selection-start-line="93" selection-start-column="40" selection-end-line="93" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="345" column="20" lean-forward="true" selection-start-line="345" selection-start-column="20" selection-end-line="345" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/written_prescriptions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="44" column="47" selection-start-line="44" selection-start-column="47" selection-end-line="44" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/PrescriptionBooks.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="81" column="5" lean-forward="true" selection-start-line="81" selection-start-column="5" selection-end-line="81" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/written_prescriptions.php.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>

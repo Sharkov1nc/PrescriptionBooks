@@ -2,16 +2,16 @@
 include_once 'PrescriptionBooks.php';
 $prescriptionBooks = new PrescriptionBooks();
 if(isset($_POST['action'])){
-    if($_POST['action'] == 'add_prescription'){
-        $result = $prescriptionBooks->addPrescription($_POST);
+    if($_POST['action'] == 'add'){
+        $result = $prescriptionBooks->addRecipe($_POST);
         echo json_encode($result);
-    } else if($_POST['action'] == 'delete_prescription'){
-        $result = $prescriptionBooks->deletePrescription($_POST['recipe_id']);
+    } else if($_POST['action'] == 'delete'){
+        $result = $prescriptionBooks->deleteRecipe($_POST['recipe_id']);
         echo json_encode($result);
-    } else if($_POST['action'] == 'edit_prescription'){
-        $result = $prescriptionBooks->editPrescription($_POST);
+    } else if($_POST['action'] == 'edit'){
+        $result = $prescriptionBooks->editRecipe($_POST);
         echo json_encode($result);
-    } else if($_POST['preview_prescriptions']){
+    } else if($_POST['action'] == 'preview'){
         $result = $prescriptionBooks->previewRecipe($_POST);
         echo json_encode($result);
     }

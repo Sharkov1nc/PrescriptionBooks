@@ -18,13 +18,13 @@ $pageTitle = "Изписани рецепти";
                 <div class="col-12 main-content">
                     <div class="prescription-for-written-content">
                         <div class=" row icon-menu-container">
-                            <a data-toggle="modal" data-target="#user-data-modal" class="text-center box add-user">
-                                <i class="s7-add-user"></i>
-                                <p>Добавяне на потребител</p>
+                            <a href="prescriptions_for_written.php" class="text-center box">
+                                <i class="s7-bookmarks"></i>
+                                <p>Рецепти за изписване</p>
                             </a>
                             <a data-toggle="modal" data-target="#search-modal" class="text-center box">
                                 <i class="s7-search"></i>
-                                <p>Търсене на потребител</p>
+                                <p>Търсене на изписани рецепти</p>
                             </a>
                         </div>
                         <div class="row table-container">
@@ -40,20 +40,18 @@ $pageTitle = "Изписани рецепти";
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <?php foreach (PrescriptionBooks::getInstance()->getWrittenPrescription() as $key => $pb) { ?>
-                                        <tr>
-                                            <th><?= $key+1 ?></th>
-                                            <th><?= $pb['fname'] . ' ' . $pb['lname'] ?></th>
-                                            <th> <?php if(!$pb['recipe_id']) { ?>
-                                                <span class="badge badge-info">Няма изписани рецепти</span></th>
-                                            <? } else { ?>
-                                                <span class="badge badge-success">Преглед на рецепта</span></th>
-                                            <?php } ?>
-                                            <th><?= $pb['recipe_date'] ?></th>
-                                            <th>
-                                                <a id="<?= $pb['id'] ?>" class="btn icon-button edit-drug"> <i class="s7-edit"></i></a>
-                                                <a id="<?= $pb['id'] ?>" class="btn icon-button remove-drug"> <i class="s7-trash"></i></a>
-                                            </th>
+                                    <?php foreach (PrescriptionBooks::getInstance()->getWrittenRecipe() as $key => $pb) { ?>
+                                        <tr id="recipe-row-<?= $pb['recipe_id'] ?>">
+                                            <td><?= $key+1 ?></td>
+                                            <td><?= $pb['fname'] . ' ' . $pb['lname'] ?></td>
+                                            <td>
+                                                <span class="badge badge-success">Преглед на рецепта</span>
+                                            </td>
+                                            <td><?= $pb['recipe_date'] ?></td>
+                                            <td>
+                                                <a id="<?= $pb['recipe_id'] ?>" class="btn icon-button edit-recipe"> <i class="s7-edit"></i></a>
+                                                <a id="<?= $pb['recipe_id'] ?>" class="btn icon-button delete-recipe"> <i class="s7-trash"></i></a>
+                                            </td>
                                         </tr>
                                     <?php } ?>
                                     </tbody>

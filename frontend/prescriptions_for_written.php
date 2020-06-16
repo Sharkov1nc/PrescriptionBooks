@@ -41,9 +41,9 @@ $pageTitle = "Рецепти за изписване";
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <?php foreach (PrescriptionBooks::getInstance()->getPrescriptionsForWritten() as $key => $pb) { ?>
+                                    <?php foreach (PrescriptionBooks::getInstance()->getRecipeForWritten() as $key => $pb) { ?>
                                     <tr id="prescrition-row-<?= $pb['id'] ?>">
-                                        <th><?= $key+1 ?></th>
+                                        <td><?= $key+1 ?></td>
                                         <td><?= $pb['user_fname'] . ' ' . $pb['user_lname'] ?></td>
                                         <td> <?php if(!$pb['recipe_id']) { ?>
                                                 <span class="badge badge-info">Няма изписани рецепти</span>

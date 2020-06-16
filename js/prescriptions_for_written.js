@@ -73,7 +73,7 @@ $(document).ready(function() {
         $.ajax({
             type: addPrescriptionForm.attr('method'),
             url: addPrescriptionForm.attr('action'),
-            data: {prescription_id: prescriptionBookId, additional_info: additionalInfo, drugs: selectedDrugs, action: 'add_prescription'},
+            data: {prescription_id: prescriptionBookId, additional_info: additionalInfo, drugs: selectedDrugs, action: 'add'},
             success: function (data) {
                 data = JSON.parse(data);
                 if(data.status){
@@ -100,7 +100,7 @@ $(document).ready(function() {
                     $.each(data, function(key, val){
 
                         tr = '<tr id="prescrition-row-'+ val.id +'"> ' +
-                            '<th class="id-th">'+ (tBody[0].rows.length + 1) +'</th>' +
+                            '<td class="id-th">'+ (tBody[0].rows.length + 1) +'</td>' +
                             '<td>'+ val.user_fname + ' ' + val.user_lname +'</td>' +
                             '<td>'+ (!val.recipe_id ? "<span class='badge badge-info'>Няма изписани рецепти</span>" : "<span class='badge badge-success'>Преглед на рецепта</span></th>") +'</td>' +
                             '<td>'+ (val.recipe_date ? val.recipe_date : "-")  +'</td>' +

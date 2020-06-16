@@ -20,7 +20,7 @@ class PrescriptionBooks extends Connection
         return self::$instance;
     }
 
-    public function getPrescriptionsForWritten()
+    public function getRecipeForWritten()
     {
         $data = array();
         $date =  gmdate('Y-m-d H:i:s', strtotime('-1 month'));
@@ -33,7 +33,7 @@ class PrescriptionBooks extends Connection
         return $data;
     }
 
-    public function getWrittenPrescription()
+    public function getWrittenRecipe()
     {
         $data = array();
         $date =  gmdate('Y-m-d H:i:s', strtotime('-1 month'));
@@ -46,7 +46,7 @@ class PrescriptionBooks extends Connection
         return $data;
     }
 
-    public function addPrescription($data){
+    public function addRecipe($data){
         $date = new DateTime();
         $dateField = $date->format('Y-m-d H:i:s');
         $hash = substr(hash('ripemd160', $this->user->fname.time()), 0, 32);
@@ -68,7 +68,7 @@ class PrescriptionBooks extends Connection
         return $result;
     }
 
-    public function deletePrescription($recipeId){
+    public function deleteRecipe($recipeId){
         $this->conn->query("DELETE FROM recipe_drugs WHERE recipe_id = ".$recipeId);
         $this->conn->query("DELETE FROM recipe WHERE id =".$recipeId );
         $result = array(
@@ -81,7 +81,7 @@ class PrescriptionBooks extends Connection
         return $result;
     }
 
-    public function editPrescription($data){
+    public function editRecipe($data){
         print_r($data);
         exit;
     }
