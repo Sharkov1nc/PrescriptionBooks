@@ -19,7 +19,7 @@ $pageTitle = "Рецепти за изписване";
                 <div class="col-12 main-content">
                     <div class="prescription-for-written-content">
                         <div class=" row icon-menu-container">
-                            <a href="written_prescriptions.php" class="text-center box add-user">
+                            <a href="written_prescriptions.php" class="text-center box">
                                 <i class="s7-note2"></i>
                                 <p>Изписани рецепти</p>
                             </a>
@@ -30,7 +30,7 @@ $pageTitle = "Рецепти за изписване";
                         </div>
                         <div class="row table-container">
                             <div class="col-12">
-                                <table class="table" id="users-table">
+                                <table class="table" id="prescriptions-table">
                                     <thead class="thead-dark">
                                     <tr>
                                         <th>#</th>
@@ -44,17 +44,17 @@ $pageTitle = "Рецепти за изписване";
                                     <?php foreach (PrescriptionBooks::getInstance()->getPrescriptionsForWritten() as $key => $pb) { ?>
                                     <tr id="prescrition-row-<?= $pb['id'] ?>">
                                         <th><?= $key+1 ?></th>
-                                        <th><?= $pb['user_fname'] . ' ' . $pb['user_lname'] ?></th>
-                                        <th> <?php if(!$pb['recipe_id']) { ?>
-                                                <span class="badge badge-info">Няма изписани рецепти</span></th>
+                                        <td><?= $pb['user_fname'] . ' ' . $pb['user_lname'] ?></td>
+                                        <td> <?php if(!$pb['recipe_id']) { ?>
+                                                <span class="badge badge-info">Няма изписани рецепти</span>
                                             <? } else { ?>
-                                                <span class="badge badge-success">Преглед на рецепта</span></th>
+                                                <span class="badge badge-success">Преглед на рецепта</span>
                                         <?php } ?>
-                                        <th><?= $pb['recipe_date'] ?></th>
-                                        <th>
-                                            <a data-user_id="<?= $pb['user_id'] ?>" class="btn icon-button view-user"> <i class="s7-user"></i></a>
+                                        </td>
+                                        <td><?= $pb['recipe_date'] ? $pb['recipe_date'] : '-'?></td>
+                                        <td>
                                             <a id="<?= $pb['id'] ?>" data-user="<?= $pb['user_fname'] . ' ' . $pb['user_lname'] ?>" class="btn icon-button add-prescription" data-toggle="modal" data-target="#add-prescription-modal"> <i class="s7-note"></i></a>
-                                        </th>
+                                        </td>
                                     </tr>
                                     <?php } ?>
                                     </tbody>
@@ -73,7 +73,7 @@ $pageTitle = "Рецепти за изписване";
                                     <form action="../backend/prescriptions_controller.php" id="add-prescription-form" method="post">
                                         <div class="form-group">
                                             <label>Пациент:</label>
-                                            <input id="patient-name" type="text" class="form-control" value="Александър Авренчев" readonly>
+                                            <input id="patient-name" type="text" class="form-control"  readonly>
                                         </div>
                                         <div class="form-group">
                                             <label>Избрани лекарства:</label>
@@ -101,6 +101,30 @@ $pageTitle = "Рецепти за изписване";
                                         </div>
                                     </form>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal" id="search-modal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Търсене на рецепти за изписване</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-inline" action="../backend/prescriptions_controller.php" method="get" id="prescription-search">
+                                        <div class="form-group form-row w-100 m-0">
+                                            <div class="col-9">
+                                                <input type="text" class="form-control w-100" name="names" placeholder="Въведете име и фамилия">
+                                            </div>
+                                            <div class="col-3">
+                                                <button class="btn btn-success w-100">Търси</button>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="action" value="search">
+                                    </form>
+                                </div>
+
                             </div>
                         </div>
                     </div>
