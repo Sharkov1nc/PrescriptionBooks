@@ -16,7 +16,7 @@ if(isset($_POST['action'])){
         echo json_encode($result);
     }
 } else if(isset($_GET['action'])) {
-    if($_GET['action'] == 'search') {
+    if($_GET['action'] == 'search' || $_GET['action'] == 'search_written') {
         $result = [];
         if (isset($_GET['names']) && strlen($_GET['names']) > 2) {
             $names = explode(" ",$_GET['names']);
@@ -25,10 +25,19 @@ if(isset($_POST['action'])){
             if(isset($names[1])){
                 $lname = $names[1];
             }
-            $result = $prescriptionBooks->searchRecipe(null, $fname, $lname);
+            if($_GET['action'] == 'search_written'){
+                $result = $prescriptionBooks->searchWrittenRecipe(null, $fname, $lname);
+
+            } else {
+                $result = $prescriptionBooks->searchRecipe(null, $fname, $lname);
+            }
             echo json_encode($result);
         } else if(isset($_GET['recipe_id'])){
-            $result = $prescriptionBooks->searchRecipe($_GET['recipe_id'], null, null);
+            if($_GET['action'] == 'search_written'){
+                $result = $prescriptionBooks->searchWrittenRecipe($_GET['recipe_id'], null, null);
+            } else {
+                $result = $prescriptionBooks->searchRecipe($_GET['recipe_id'], null, null);
+            }
             echo json_encode($result);
         } else {
             echo json_encode($result);

@@ -320,7 +320,7 @@ table > .thead-dark > tr > .table-title {
     font-size: 12px;
     padding: 5px 8px;
 }
-#add-prescription-modal .modal-dialog {
+#add-prescription-modal .modal-dialog, #edit-prescription-modal .modal-dialog {
     max-width: 750px;
 }
 .drugs-select .list-group, #selected-drugs {
