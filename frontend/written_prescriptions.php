@@ -113,7 +113,7 @@ $pageTitle = "Изписани рецепти";
                                         </div>
                                         <div class="form-group">
                                             <label>Допълнителна информация:</label>
-                                            <textarea class="form-control" name="additional_information" rows="3"></textarea>
+                                            <textarea class="form-control" id="additional_info" name="additional_information" rows="3"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-success btn-block">Запази промените</button>

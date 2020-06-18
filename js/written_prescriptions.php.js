@@ -40,11 +40,12 @@ $(document).ready(function() {
                     selectedDrugs = data.drugs;
                     let drugsText = '';
                     $.each(data.drugs, function (key, val) {
-                        drugsText += " <div class='badge badge-light badge-drugs' id='" + val.id + "'>" + val.name + "</div> "
+                        drugsText += " <div class='badge badge-light badge-drugs' id='" + val.id + "'>" + (val.quantity > 1 ? val.quantity +'x ' : '') + val.name + "</div> "
                     });
                     $("#selected-drugs").html(drugsText);
                 }
                 $("#patient-name").val(data.user_fname + ' ' + data.user_lname).attr("readonly", true);
+                $("#additional_info").text(data.additional_information);
                 editPrescriptionModal.modal();
             }
         })

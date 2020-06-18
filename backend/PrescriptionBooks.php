@@ -82,8 +82,21 @@ class PrescriptionBooks extends Connection
     }
 
     public function editRecipe($data){
-        print_r($data);
-        exit;
+        $this->conn->query("UPDATE recipe SET additional_information = ".$data['additional_info']);
+        $this->conn->query("DELETE FROM recipe_drugs WHERE recipe_id = ".$data['recipe_id']);
+        if(isset($data['drugs']) && !empty($data['drugs'])){
+            foreach ($data['drugs'] as $drug){
+                $this->conn->query("INSERT INTO recipe_drugs(recipe_id, drug_id, quantity) VALUES(".$data['recipe_id'].", ".$drug['id'].", ".$drug['quantity'].")");
+            }
+        }
+        $result = [
+            'status' => 1
+        ];
+        if($this->conn->error){
+            $result['status'] = 0;
+            $result['message'] = 'Възникна грешка, моля опитайте отново по-късно';
+        }
+        return $result;
     }
 
     public function searchRecipe($recipeId = null, $userFname = null, $userLname = null){
