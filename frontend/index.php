@@ -26,17 +26,17 @@
                                 <?php } ?>
                                 <?php if ($authentication->user->user_position == 2) { ?>
                                     <a href="prescriptions_for_written.php" class="text-center box">
-                                        <i class="s7-id"></i>
+                                        <i class="s7-bookmarks"></i>
                                         <p>Рецепти за изписване</p>
                                     </a>
                                     <a href="patients.php" class="text-center box">
-                                        <i class="s7-id"></i>
+                                        <i class="s7-users"></i>
                                         <p>Пациенти</p>
                                     </a>
                                 <?php } ?>
                                 <?php if ($authentication->user->user_position == 2 || $authentication->user->user_position == 4) { ?>
                                     <a href="written_prescriptions.php" class="text-center box">
-                                        <i class="s7-id"></i>
+                                        <i class="s7-note2"></i>
                                         <p>Изписани рецепти</p>
                                     </a>
                                 <?php } ?>

@@ -84,6 +84,36 @@ $(document).ready(function() {
         });
     });
 
+    $("#preview-recipe").on("click", function () {
+
+        var form = document.createElement("form");
+        form.setAttribute("method", addPrescriptionForm.attr('method'));
+        form.setAttribute("action", addPrescriptionForm.attr('action'));
+
+        form.setAttribute("target", "_blank");
+
+        let additionalInfo = document.createElement("input");
+        additionalInfo.setAttribute("name", "additional_info");
+        additionalInfo.setAttribute("value", $('textarea[name="additional_information"]').val());
+        let names = document.createElement("input");
+        names.setAttribute("name", "names");
+        names.setAttribute("value", $('#patient-name').val());
+        let action = document.createElement("input");
+        action.setAttribute("name", "action");
+        action.setAttribute("value", "preview");
+        let selectedItems = document.createElement("input");
+        selectedItems.setAttribute("name", "drugs");
+        selectedItems.setAttribute("value", JSON.stringify(selectedDrugs));
+
+        form.appendChild(additionalInfo);
+        form.appendChild(names);
+        form.appendChild(action);
+        form.appendChild(selectedItems);
+        document.body.appendChild(form);
+        form.submit();
+
+    });
+
     searchForm.submit(function (e) {
         e.preventDefault();
         $.ajax({

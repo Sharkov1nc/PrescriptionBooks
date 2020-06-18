@@ -48,7 +48,7 @@ $pageTitle = "Рецепти за изписване";
                                         <td> <?php if(!$pb['recipe_id']) { ?>
                                                 <span class="badge badge-info">Няма изписани рецепти</span>
                                             <? } else { ?>
-                                                <span class="badge badge-success">Преглед на рецепта</span>
+                                                <a href="../backend/prescriptions_controller.php?action=print&previous=true&recipe_id=<?= $pb['recipe_id'] ?>" target="_blank"><span class="badge badge-success">Преглед на рецепта</span></a>
                                         <?php } ?>
                                         </td>
                                         <td><?= $pb['recipe_date'] ? $pb['recipe_date'] : '-'?></td>
@@ -96,8 +96,13 @@ $pageTitle = "Рецепти за изписване";
                                             <textarea class="form-control" name="additional_information" rows="3"></textarea>
                                         </div>
                                         <input type="hidden" name="patient_id">
-                                        <div class="form-group">
-                                                <button type="submit" class="btn btn-success btn-block">Добави рецепта</button>
+                                        <div class="form-group row">
+                                            <div class="col-4">
+                                                <button id="preview-recipe" type="button" class="btn btn-success btn-block">Прегледай рецепта</button>
+                                            </div>
+                                            <div class="col-8">
+                                                <button type="submit" class="btn btn-danger btn-block">Добави рецепта</button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>

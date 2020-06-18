@@ -316,7 +316,7 @@ table > .thead-dark > tr > .table-title {
 #search-modal, #add-drug-modal {
     margin-top: 120px;
 }
-.prescription-for-written-content .badge {
+.prescription-for-written-content .badge, .written-prescriptions-content .badge {
     font-size: 12px;
     padding: 5px 8px;
 }

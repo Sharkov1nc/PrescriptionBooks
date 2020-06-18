@@ -46,7 +46,7 @@ $pageTitle = "Изписани рецепти";
                                             <td><?= $key+1 ?></td>
                                             <td><?= $pb['fname'] . ' ' . $pb['lname'] ?></td>
                                             <td>
-                                                <span class="badge badge-success">Преглед на рецепта</span>
+                                                <a href="../backend/prescriptions_controller.php?action=print&recipe_id=<?= $pb['recipe_id'] ?>" target="_blank"><span class="badge badge-success">Преглед на рецепта</span></a>
                                             </td>
                                             <td><?= $pb['recipe_date'] ?></td>
                                             <td>
@@ -116,7 +116,7 @@ $pageTitle = "Изписани рецепти";
                                             <textarea class="form-control" id="additional_info" name="additional_information" rows="3"></textarea>
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-success btn-block">Запази промените</button>
+                                            <button type="submit" class="btn btn-danger btn-block">Запази промените</button>
                                         </div>
                                     </form>
                                 </div>

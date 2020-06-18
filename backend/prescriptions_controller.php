@@ -12,8 +12,29 @@ if(isset($_POST['action'])){
         $result = $prescriptionBooks->editRecipe($_POST);
         echo json_encode($result);
     } else if($_POST['action'] == 'preview'){
-        $result = $prescriptionBooks->previewRecipe($_POST);
-        echo json_encode($result);
+        if (isset($_POST['names']) && strlen($_POST['names']) > 2) {
+            $names = explode(" ", $_POST['names']);
+            $fname = $names[0];
+            $lname = null;
+            if (isset($names[1])) {
+                $lname = $names[1];
+            }
+            $drugs = json_decode($_POST['drugs']);
+            $drugsArr = [];
+            foreach ($drugs as $drug){
+                $drugsArr[] = (array) $drug;
+            }
+            $data = [
+                'user_fname' => $fname,
+                'user_lname' => $lname,
+                'recipe_date' => gmdate('Y-m-d H:i:s', time()),
+                'drugs' => $drugsArr,
+                'additional_information' => $_POST['additional_info'],
+                'doctor' => $prescriptionBooks->user->fname . " " . $prescriptionBooks->user->lname
+            ];
+            $result = $prescriptionBooks->printRecipe(null, $data);
+            echo json_encode($result);
+        }
     }
 } else if(isset($_GET['action'])) {
     if($_GET['action'] == 'search' || $_GET['action'] == 'search_written') {
@@ -42,5 +63,12 @@ if(isset($_POST['action'])){
         } else {
             echo json_encode($result);
         }
+    }
+    else if($_GET['action'] == 'print'){
+        $previous = false;
+        if(isset($_GET['previous'])){
+            $previous = true;
+        }
+        $result= $prescriptionBooks->printRecipe($_GET['recipe_id'], null, $previous);
     }
 }
