@@ -1,5 +1,5 @@
 <?php
-include '../backend/Authentication.php'; //включваме класа auth (добавяме го)
+include '../backend/Authentication.php';
 ?>
 <!doctype html>
 <html lang="en">
@@ -9,7 +9,6 @@ include '../backend/Authentication.php'; //включваме класа auth (�
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Accounting Software</title>
-    <!-- вмъкваме библиотеки bootstrap,jquery и css файлове -->
     <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../bootstrap/stroke-7/style.css">
     <link rel="stylesheet" href="../css/styles.css">
@@ -38,36 +37,16 @@ include '../backend/Authentication.php'; //включваме класа auth (�
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <button class="btn-login btn-block">Влез</button>
+                        <button class="btn-login btn-block btn-danger">Влез</button>
                     </div>
                 </div>
             </form>
         </div>
         <div class="card-footer">
             <div class="row link-content">
-                <div class="col-6 text-center">
+                <div class="col-6 offset-6 text-right">
                     <a href="password_recovery.php">Забравена парола ?</a>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal" id="error-handler">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <h4 class="modal-title">Възникна грешка</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <div class="modal-body">
-
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Затвори</button>
-                </div>
-
             </div>
         </div>
     </div>

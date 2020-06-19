@@ -1,5 +1,5 @@
 <?php
-include '../backend/Authentication.php'; // вмъкваме клас Auth
+include '../backend/Authentication.php';
 ?>
 <!doctype html>
 <html lang="en">
@@ -9,7 +9,6 @@ include '../backend/Authentication.php'; // вмъкваме клас Auth
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Accounting Software</title>
-    <!-- вмъкваме библиотеки bootstrap,jquery и css файлове -->
     <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../bootstrap/stroke-7/style.css">
     <link rel="stylesheet" href="../css/styles.css">
@@ -39,24 +38,20 @@ include '../backend/Authentication.php'; // вмъкваме клас Auth
             </div>
             <div class="card-footer">
                 <div class="row link-content">
-                    <div class="col-6 text-center">
+                    <div class="col-6 offset-6 text-right">
                         <a href="login.php">Влезте в профила си</a>
-                    </div>
-                    <div class="col-6 text-center">
-                        <a href="register.php">Регистрация</a>
                     </div>
                 </div>
             </div>
         </div>
         <?php
-        if(isset($_POST['email'])){ // проверяваме за изпратени елементи в масива $_POST
-            $auth = new Auth(); // създаваме обект от клас Auth
-            // извикваме метод, който изпраща забравена парола на имейл адреса на потребителя
-            $result = $auth->passwordRecovery($_POST['email']);  ?>
-            <!-- Съобщение дали е изпратена паролата на посочената поща или е възникнала грешка  -->
-            <p class="text-center text-white" style="margin-top: 15%;"><?= $result['message'] ?></p> 
-            <?php
-        }
+        if(isset($_POST['email'])){
+            $auth = new Authentication();
+            $result = $auth->passwordRecovery($_POST['email']);
+            if($result){ ?>
+                <p class="text-center text-white m-3" style="margin-top: 120px !important;">Паролата ви беше изпратена успешно на посочения email адрес</p>
+             <?php }
+            }
         ?>
     </div>
 </body>

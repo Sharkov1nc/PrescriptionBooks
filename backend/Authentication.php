@@ -2,6 +2,7 @@
 session_start();
 include_once 'Connection.php';
 include_once 'MainController.php';
+include_once '../bootstrap/PHPMailer/PHPMailerAutoload.php';
 
 class Authentication extends Connection {
 
@@ -15,18 +16,18 @@ class Authentication extends Connection {
         }
     }
 
-    protected function register($data){
+    private function register($data){
         $date = new DateTime();
         $password = rand(100000, 999999);
         $dateField = $date->format('Y-m-d H:i:s');
         $position = isset($data['position']) ? $data['position'] : 3;
         $this->conn->query("INSERT INTO users (fname, lname, egn, email, password, `user_position`, `date`)  
-        VALUES('".$data['fname']."', '".$data['lname']."', '".$data['egn']."', '".$data['email']."', '".md5($password)."', '".$position."', '".$dateField."')");
+        VALUES('".$data['fname']."', '".$data['lname']."', '".$data['egn']."', '".$data['email']."', '".$password."', '".$position."', '".$dateField."')");
         $userId = $this->conn->insert_id;
         if($position == 3){
             $this->conn->query("INSERT INTO prescription_books(patient_id, doctor_id, `date`) VALUES(".$userId.", ".$data['doctor'].", '".$dateField."')");
         }
-
+        $this->sendPassword($data['email'], $password);
         return array(
             'status' => 1,
             'user' => [
@@ -41,9 +42,9 @@ class Authentication extends Connection {
     }
 
 
-    protected function login($email, $password){
+    private function login($email, $password){
 
-        $result = $this->conn->query("SELECT * FROM users WHERE email ='" . $email . "' AND password = '" . md5($password) . "' LIMIT 1");
+        $result = $this->conn->query("SELECT * FROM users WHERE email ='" . $email . "' AND password = '" . $password . "' LIMIT 1");
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_object()) {
                 $_SESSION['user'] = $row;
@@ -123,14 +124,33 @@ class Authentication extends Connection {
         return $this->login($email, $password);
     }
 
-    public function getUserPassword($email){
-        $password = null;
+    public function passwordRecovery($email){
         $result = $this->conn->query("SELECT password FROM users WHERE email = '".$email."' LIMIT 1");
         if ($result->num_rows > 0){
             $arr = $result->fetch_assoc();
             $password = $arr['password'];
+            $this->sendPassword($email, $password);
+            return true;
         }
-        return $password;
+        return false;
+    }
+
+    private function sendPassword($email, $password){
+        $mail = new PHPMailer();
+        $mail->Mailer = "mail";
+        $mail->Host = "smtp.gmail.com";
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = "tls";
+        $mail->Port = 587;
+        $mail->Username = "i.sharkovv@gmail.com";
+        $mail->Password = 'powerm3sharkov';
+        $mail->CharSet = "UTF-8";
+        $mail->setFrom("i.sharkovv@gmail.com" , "Дигитални рецептурни книжки");
+        $mail->AddAddress($email);
+        $mail->isHTML(true);
+        $mail->Subject = "Дигитални рецептурни книжки парола за вход";
+        $mail->Body = "Вашата парола за вход в системата е ". $password ;
+        $mail->Send();
     }
 
 }
