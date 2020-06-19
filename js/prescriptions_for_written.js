@@ -132,7 +132,7 @@ $(document).ready(function() {
                         tr = '<tr id="prescrition-row-'+ val.id +'"> ' +
                             '<td class="id-th">'+ (tBody[0].rows.length + 1) +'</td>' +
                             '<td>'+ val.user_fname + ' ' + val.user_lname +'</td>' +
-                            '<td>'+ (!val.recipe_id ? "<span class='badge badge-info'>Няма изписани рецепти</span>" : "<span class='badge badge-success'>Преглед на рецепта</span></th>") +'</td>' +
+                            '<td>'+ (!val.recipe_id ? "<span class='badge badge-info'>Няма изписани рецепти</span>" : "<a href='../backend/prescriptions_controller.php?action=print&previous=true&recipe_id="+ val.recipe_id +"' target='_blank'><span class='badge badge-success'>Преглед на рецепта</span></a></th>") +'</td>' +
                             '<td>'+ (val.recipe_date ? val.recipe_date : "-")  +'</td>' +
                             '<td>' +
                             '<a class="btn icon-button add-prescription" id="'+ val.id +'" data-user="'+ val.user_fname + ' ' + val.user_lname +'" data-toggle="modal" data-target="#add-prescription-modal" > <i class="s7-note"></i></a> </td> </tr>';
