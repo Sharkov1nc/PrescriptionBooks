@@ -1,13 +1,17 @@
 <?php
 include_once 'Connection.php';
+include_once 'Authentication.php';
 
 class Users extends connection {
 
     public  static $instance;
+    public $user;
 
     public function __construct()
     {
         parent::__construct();
+        $auth = new Authentication();
+        $this->user = $auth->user;
     }
 
     public static function getInstance(){
@@ -17,19 +21,23 @@ class Users extends connection {
 
     public function getUsers($type = null){
         $data = array();
-        $joinPosition = '';
-        $position = '';
+        $joins = '';
+        $selects = '';
+        $where = '';
         if($type === 'doctors'){
-            $position = "AND users.`user_position` = 2";
+            $where = "AND users.`user_position` = 2";
         } else if($type === 'patients') {
-            $position = "AND users.`user_position` = 3";
+            $where = "AND users.`user_position` = 3 AND prescription_books.doctor_id = ". $this->user->id;
+            $joins = "INNER JOIN prescription_books ON prescription_books.patient_id = users.id";
+            $selects = ', prescription_books.doctor_id';
         } else if($type === 'pharmacy') {
-            $position = "AND users.`user_position` = 4";
+            $where = "AND users.`user_position` = 4";
         }
         if(!$type){
-            $joinPosition = "INNER JOIN positions ON positions.id = users.user_position";
+            $joins = "INNER JOIN positions ON positions.id = users.user_position";
+            $selects = ', `positions`.`position`';
         }
-        $result  = $this->conn->query("SELECT users.id, users.fname, users.lname, users.email, users.`date` ". ($joinPosition != '' ? ', `positions`.`position`' : '') ."  FROM users ". $joinPosition ." WHERE users.`user_position` != 1 ". $position ." ORDER BY users.id DESC");
+        $result  = $this->conn->query("SELECT users.id, users.fname, users.lname, users.email, users.`date` ". $selects ."  FROM users ". $joins ." WHERE users.`user_position` != 1 ". $where ." ORDER BY users.id DESC");
         if($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
                 $data[] = $row;
@@ -51,15 +59,18 @@ class Users extends connection {
 
     public function searchUser($userId = null, $fname = null, $lname = null){
         $data = array();
-        $query = '';
+        $where = '';
+        if($this->user->user_position == 2){
+            $where = 'AND prescription_books.doctor_id = ' . $this->user->id;
+        }
         if($userId){
-            $query = "SELECT users.id, users.fname, users.lname, users.email, users.egn, users.`date`, users.user_position as position_id, positions.position as `position`, prescription_books.doctor_id as doctor FROM users INNER JOIN `positions` ON positions.id = users.user_position LEFT JOIN prescription_books ON users.id = prescription_books.patient_id WHERE users.id = ".$userId."  AND users.user_position != 1 ";
+            $query = "SELECT users.id, users.fname, users.lname, users.email, users.egn, users.`date`, users.user_position as position_id, positions.position as `position`, prescription_books.doctor_id as doctor FROM users INNER JOIN `positions` ON positions.id = users.user_position LEFT JOIN prescription_books ON users.id = prescription_books.patient_id WHERE users.id = ".$userId."  AND users.user_position != 1 ".$where." ";
         } else {
             $lnameSearch = '';
             if($lname){
                 $lnameSearch = " OR users.lname LIKE '%".$lname."%' ";
             }
-            $query = "SELECT users.id, users.fname, users.lname, users.email, users.egn, users.`date`, users.user_position as position_id, positions.position as `position` FROM users INNER JOIN `positions` ON positions.id = users.user_position WHERE (users.fname LIKE '%".$fname."%' ". $lnameSearch .") AND users.user_position != 1 ";
+            $query = "SELECT users.id, users.fname, users.lname, users.email, users.egn, users.`date`, users.user_position as position_id, positions.position as `position` FROM users INNER JOIN `positions` ON positions.id = users.user_position LEFT JOIN prescription_books ON users.id = prescription_books.patient_id WHERE (users.fname LIKE '%".$fname."%' ". $lnameSearch .") AND users.user_position != 1 ".$where." ";
         }
         $result  = $this->conn->query($query);
         if($result->num_rows > 0){
@@ -115,6 +126,14 @@ class Users extends connection {
 
 
     public function removeUser($userId){
+        $result = $this->conn->query("SELECT recipe.id as recipe_id FROM prescription_books LEFT JOIN recipe ON prescription_books.id = recipe.prescription_book_id LEFT JOIN users ON prescription_books.patient_id = users.id WHERE users.id = ".$userId);
+        if($result->num_rows > 0){
+            $row = $result->fetch_assoc();
+            if(!empty($row['recipe_id'])){
+                $this->conn->query("DELETE FROM recipe_drugs WHERE recipe_id = ".$row['recipe_id']);
+                $this->conn->query("DELETE FROM recipe WHERE id =".$row['recipe_id'] );
+            }
+        }
         $this->conn->query("DELETE FROM prescription_books WHERE patient_id = ".intval($userId));
         $this->conn->query("DELETE FROM users WHERE id=".intval($userId));
         $result = array(

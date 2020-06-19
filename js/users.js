@@ -112,7 +112,6 @@ $(document).ready(function(){
                     $("#email-field").val(data[0].email).attr("readonly", true);
                     $("#egn-field").val(data[0].egn).attr("readonly", true);
                     $("#submit-btn").css('display','none');
-                    $(".password-container").css('display', 'none');
                     $('#position-field').val(data[0].position_id).prop('disabled', 'disabled');
                 } else {
                     $(".modal-title").text('Редакция на потребител');
@@ -120,7 +119,6 @@ $(document).ready(function(){
                     $("#lname-field").val(data[0].lname).removeAttr("readonly");
                     $("#email-field").val(data[0].email).removeAttr("readonly");
                     $("#egn-field").val(data[0].egn).removeAttr("readonly");
-                    $(".password-container").css('display', 'none');
                     $("#action").val("edit");
                     $("#user-id").val(data[0].id);
                     $('#position-field').val(data[0].position_id).prop('disabled', 'disabled');
@@ -142,7 +140,6 @@ let clearForm = () => {
     $("input[type=text]").val("").removeAttr("readonly");
     $("#submit-btn").css('display','block');
     $('.doctor-field-container').css('display', 'none');
-    $(".password-container").css('display', 'block');
     $("#submit-btn").text("Добави потребител");
     $("#form-action").val("add");
     $("#user-id").val("");

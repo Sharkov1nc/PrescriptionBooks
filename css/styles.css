@@ -298,7 +298,7 @@ table > .thead-dark > tr > .table-title {
 .avatar-container .description .mail {
     color: rgba(255, 255, 255, .5);
 }
-#user-modal .modal-dialog {
+#user-modal .modal-dialog, #patient-modal .modal-dialog {
     max-width: 550px;
     margin-top: 120px;
 }

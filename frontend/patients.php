@@ -16,9 +16,9 @@ include_once '../backend/Users.php';
         <div class="col-10 page-content">
             <div class="row">
                 <div class="col-12 main-content">
-                    <div class="users-content">
+                    <div class="patients-content">
                         <div class=" row icon-menu-container">
-                            <a data-toggle="modal" data-target="#user-modal" class="text-center box add-user">
+                            <a data-toggle="modal" data-target="#patient-modal" class="text-center box add-user">
                                 <i class="s7-add-user"></i>
                                 <p>Добавяне на пациент</p>
                             </a>
@@ -29,28 +29,28 @@ include_once '../backend/Users.php';
                         </div>
                         <div class="row table-container">
                             <div class="col-12">
-                                <table class="table" id="users-table">
+                                <table class="table" id="patients-table">
                                     <thead class="thead-dark">
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Име и фамилия</th>
-                                        <th scope="col">Имейл адрес</th>
-                                        <th scope="col">Добавен на</th>
-                                        <th scope="col">Действия</th>
+                                        <th>#</th>
+                                        <th>Име и фамилия</th>
+                                        <th>Имейл адрес</th>
+                                        <th>Добавен на</th>
+                                        <th>Действия</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <?php foreach (Users::getInstance()->getPatients() as $key => $user) { ?>
-                                        <tr>
-                                            <th scope="col"><?= ++$key ?></th>
-                                            <th scope="col"><?= $user['fname'] . ' ' . $user['lname'] ?></th>
-                                            <th scope="col"><?= $user['email'] ?></th>
-                                            <th scope="col"><?= $user['date'] ?></th>
-                                            <th scope="col">
-                                                <a id="'<?= $user['id'] ?>'" class="btn icon-button edit-expense"> <i class="s7-id"></i></a>
-                                                <a id="'<?= $user['id'] ?>'" class="btn icon-button edit-expense"> <i class="s7-edit"></i></a>
-                                                <a id="'<?= $user['id'] ?>'" class="btn icon-button edit-expense"> <i class="s7-trash"></i></a>
-                                            </th>
+                                    <?php foreach (Users::getInstance()->getUsers('patients') as $key => $user) { ?>
+                                        <tr id="patient-<?= $user['id'] ?>">
+                                            <td><?= ++$key ?></td>
+                                            <td class="col-name"><?= $user['fname'] . ' ' . $user['lname'] ?></td>
+                                            <td class="col-email"><?= $user['email'] ?></td>
+                                            <td><?= $user['date'] ?></td>
+                                            <td>
+                                                <a id="<?= $user['id'] ?>" data-action="show" class="btn icon-button info-patient"> <i class="s7-id"></i></a>
+                                                <a id="<?= $user['id'] ?>" data-action="edit" class="btn icon-button edit-patient"> <i class="s7-edit"></i></a>
+                                                <a id="<?= $user['id'] ?>" class="btn icon-button remove-patient"> <i class="s7-trash"></i></a>
+                                            </td>
                                         </tr>
                                     <?php } ?>
                                     </tbody>
@@ -68,10 +68,10 @@ include_once '../backend/Users.php';
                                 </div>
 
                                 <div class="modal-body">
-                                    <form class="form-inline" action="../backend/users_controller.php" method="get" id="user-search">
-                                        <div class="form-group form-row w-100">
+                                    <form class="form-inline" action="../backend/users_controller.php" method="get" id="patient-search">
+                                        <div class="form-group form-row w-100 m-0">
                                             <div class="col-9">
-                                                <input type="text" class="form-control w-100" name="username" id="user-search" placeholder="Въведете потребителско име">
+                                                <input type="text" class="form-control w-100" name="names" placeholder="Въведете име и фамилия">
                                             </div>
                                             <div class="col-3">
                                                 <button class="btn btn-success w-100">Търси</button>
@@ -85,7 +85,7 @@ include_once '../backend/Users.php';
                         </div>
                     </div>
 
-                    <div class="modal" id="user-modal">
+                    <div class="modal" id="patient-modal">
                         <div class="modal-dialog">
                             <div class="modal-content">
 
@@ -95,7 +95,7 @@ include_once '../backend/Users.php';
                                 </div>
 
                                 <div class="modal-body">
-                                    <form action="../backend/users_controller.php" method="post" id="users-form">
+                                    <form action="../backend/users_controller.php" method="post" id="patient-form">
                                         <div class="form-group form-row w-100">
                                             <div class="col-12">
                                                 <div class="row">
@@ -113,22 +113,10 @@ include_once '../backend/Users.php';
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-6">
+                                                    <div class="col-12">
                                                         <div class="form-group">
                                                             <label>ЕГН</label>
                                                             <input type="text" id="egn-field" class="form-control" name="egn" placeholder="Въведете енг">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="form-group">
-                                                            <label>Позиция</label>
-                                                            <select name="position" id="position-field" class="form-control">
-                                                                <?php foreach (MainController::getInstance()->getPositions() as $position) { ?>
-                                                                    <option value="<?= $position['id'] ?>"> <?= $position['position'] ?></option>
-                                                                    <?php
-                                                                }
-                                                                ?>
-                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -136,14 +124,11 @@ include_once '../backend/Users.php';
                                                     <label>E-mail адрес</label>
                                                     <input type="text" id="email-field" class="form-control" name="email" placeholder="Въведете e-mail">
                                                 </div>
-                                                <div class="form-group">
-                                                    <label>Парола</label>
-                                                    <input type="text" id="password-field" class="form-control" name="password" placeholder="Въведете парола">
-                                                </div>
-                                                <input type="hidden" name="user-id" id="user-id" value="0">
+                                                <input type="hidden" name="user_id" id="user-id" value="0">
                                                 <input type="hidden" name="action" id="action" value="add">
+                                                <input type="hidden" name="position" value="3">
                                                 <div class="form-group mt-4 mb-0">
-                                                    <button type="submit" id="submit-btn" class="btn btn-block btn-lg form-confirm-button">Добави Потребител</button>
+                                                    <button type="submit" id="submit-btn" class="btn btn-block btn-danger">Добави Пациент</button>
                                                 </div>
                                             </div>
                                         </div>

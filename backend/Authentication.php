@@ -17,10 +17,11 @@ class Authentication extends Connection {
 
     protected function register($data){
         $date = new DateTime();
+        $password = rand(100000, 999999);
         $dateField = $date->format('Y-m-d H:i:s');
         $position = isset($data['position']) ? $data['position'] : 3;
         $this->conn->query("INSERT INTO users (fname, lname, egn, email, password, `user_position`, `date`)  
-        VALUES('".$data['fname']."', '".$data['lname']."', '".$data['egn']."', '".$data['email']."', '".md5($data['password'])."', '".$position."', '".$dateField."')");
+        VALUES('".$data['fname']."', '".$data['lname']."', '".$data['egn']."', '".$data['email']."', '".md5($password)."', '".$position."', '".$dateField."')");
         $userId = $this->conn->insert_id;
         if($position == 3){
             $this->conn->query("INSERT INTO prescription_books(patient_id, doctor_id, `date`) VALUES(".$userId.", ".$data['doctor'].", '".$dateField."')");
@@ -98,11 +99,6 @@ class Authentication extends Connection {
             $result['message'] = 'Невалиден имейл';
             return $result;
         }
-        if(strlen($data['password']) < 6){
-            $result['status'] = 0;
-            $result['message'] = 'Паролата трябва да е над 5 символа';
-            return $result;
-        }
         if(!$result['status']){
             return $result;
         }
@@ -134,7 +130,7 @@ class Authentication extends Connection {
             $arr = $result->fetch_assoc();
             $password = $arr['password'];
         }
-        return $password; // връщаме паролата
+        return $password;
     }
 
 }

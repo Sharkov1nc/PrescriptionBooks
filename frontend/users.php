@@ -1,6 +1,6 @@
 <?php
 $pageTitle = "Потребители";
-include_once  '../backend/Users.php'
+include_once  '../backend/Users.php';
 ?>
 <!doctype html>
 <html lang="en">
@@ -32,27 +32,27 @@ include_once  '../backend/Users.php'
                                         <table class="table" id="users-table">
                                             <thead class="thead-dark">
                                             <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">Име и фамилия</th>
-                                                <th scope="col">Имейл адрес</th>
-                                                <th scope="col">Добавен на</th>
-                                                <th scope="col">Позиция</th>
-                                                <th scope="col">Действия</th>
+                                                <th>#</th>
+                                                <th>Име и фамилия</th>
+                                                <th>Имейл адрес</th>
+                                                <th>Добавен на</th>
+                                                <th>Позиция</th>
+                                                <th>Действия</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <?php foreach (Users::getInstance()->getUsers() as $key => $user) { ?>
                                             <tr id="user-<?= $user['id'] ?>">
-                                                <th scope="col"><?= ++$key ?></th>
-                                                <th scope="col" class="col-name"><?= $user['fname'] . ' ' . $user['lname'] ?></th>
-                                                <th scope="col" class="col-email"><?= $user['email'] ?></th>
-                                                <th scope="col"><?= $user['date'] ?></th>
-                                                <th scope="col"><?= $user['position'] ?></th>
-                                                <th scope="col">
+                                                <td><?= ++$key ?></td>
+                                                <td class="col-name"><?= $user['fname'] . ' ' . $user['lname'] ?></td>
+                                                <td class="col-email"><?= $user['email'] ?></td>
+                                                <td><?= $user['date'] ?></td>
+                                                <td><?= $user['position'] ?></td>
+                                                <td>
                                                     <a id="<?= $user['id'] ?>" data-action="show" class="btn icon-button info-user"> <i class="s7-id"></i></a>
                                                     <a id="<?= $user['id'] ?>" data-action="edit" class="btn icon-button edit-user"> <i class="s7-edit"></i></a>
                                                     <a id="<?= $user['id'] ?>" class="btn icon-button remove-user"> <i class="s7-trash"></i></a>
-                                                </th>
+                                                </td>
                                             </tr>
                                             <?php } ?>
                                             </tbody>
@@ -135,7 +135,7 @@ include_once  '../backend/Users.php'
                                                             </div>
                                                         </div>
                                                         <div class="form-group doctor-field-container">
-                                                            <label>Позиция</label>
+                                                            <label>Лекар</label>
                                                             <select name="doctor" id="doctor-field" class="form-control">
                                                                 <?php foreach (Users::getInstance()->getUsers('doctors') as $user) { ?>
                                                                     <option value="<?= $user['id'] ?>"> др.  <?= $user['fname'] . ' ' . $user['lname'] ?></option>
@@ -148,14 +148,10 @@ include_once  '../backend/Users.php'
                                                             <label>E-mail адрес</label>
                                                             <input type="text" id="email-field" class="form-control" name="email" placeholder="Въведете e-mail">
                                                         </div>
-                                                        <div class="form-group password-container">
-                                                            <label>Парола</label>
-                                                            <input type="text" id="password-field" class="form-control" name="password" placeholder="Въведете парола">
-                                                        </div>
                                                         <input type="hidden" name="user_id" id="user-id" value="0">
                                                         <input type="hidden" name="action" id="action" value="add">
                                                         <div class="form-group mt-4 mb-0">
-                                                            <button type="submit" id="submit-btn" class="btn btn-block btn-lg form-confirm-button">Добави Потребител</button>
+                                                            <button type="submit" id="submit-btn" class="btn btn-block btn-danger">Добави Потребител</button>
                                                         </div>
                                                     </div>
                                                 </div>
