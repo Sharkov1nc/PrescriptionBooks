@@ -3,7 +3,7 @@ include_once 'Drugs.php';
 $drugs = new Drugs();
 
 if(isset($_FILES['drugs_excel'])){
-    $result = $drugs->importDrugs();
+    $result = $drugs->importDrugs($_FILES['drugs_excel']);
     echo json_encode($result);
 } else if(isset($_POST['action'])){
 

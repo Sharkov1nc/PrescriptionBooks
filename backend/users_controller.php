@@ -5,8 +5,10 @@ include_once 'Authentication.php';
 $auth = new Authentication();
 $users = new Users();
 
-if(isset($_POST['action'])){
-
+if(isset($_FILES['users_excel'])){
+    $result = $users->importPatients($_FILES['users_excel']);
+    echo json_encode($result);
+} else if(isset($_POST['action'])){
     if ($_POST['action'] == 'add'){
         if($_POST['position'] == 3 && !isset($_POST['doctor'])){
            $_POST['doctor'] = $auth->user->id;

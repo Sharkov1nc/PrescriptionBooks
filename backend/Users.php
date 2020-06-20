@@ -1,16 +1,19 @@
 <?php
 include_once 'Connection.php';
 include_once 'Authentication.php';
+include_once '../bootstrap/phpExcel/Classes/PHPExcel.php';
 
 class Users extends connection {
 
     public  static $instance;
     public $user;
+    private $auth;
 
     public function __construct()
     {
         parent::__construct();
         $auth = new Authentication();
+        $this->auth = $auth;
         $this->user = $auth->user;
     }
 
@@ -143,6 +146,49 @@ class Users extends connection {
             $result['status'] = 0;
             $result['message'] = 'Не можете да изтриете потребителя';
         }
+        return $result;
+    }
+
+    public function importPatients($data){
+        $allowedFileType = [
+            'application/vnd.ms-excel',
+            'text/xls',
+            'text/xlsx',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        ];
+
+        $result = array(
+            'status' => 1
+        );
+
+        if (in_array($data['type'], $allowedFileType)) {
+             $targetPath = '../uploads/' . $data['name'];
+             move_uploaded_file($data['tmp_name'], $targetPath);
+
+             $excelReader = PHPExcel_IOFactory::createReaderForFile($targetPath);
+             $excelObj = $excelReader->load($targetPath);
+             $worksheet = $excelObj->getSheet(0);
+             $lastRow = $worksheet->getHighestRow();
+
+             $date = new DateTime();
+             $dateField = $date->format('Y-m-d H:i:s');
+
+             for ($row = 1; $row <= $lastRow; $row++) {
+                  $uData = [
+                      'fname' => $worksheet->getCell('A'.$row)->getValue(),
+                      'lname' => $worksheet->getCell('B'.$row)->getValue(),
+                      'email' => $worksheet->getCell('C'.$row)->getValue()->getPlainText(),
+                      'egn' => $worksheet->getCell('D'.$row)->getValue(),
+                      'doctor' => $worksheet->getCell('E'.$row)->getValue(),
+
+                  ];
+                  $this->auth->validateRegister($uData);
+             }
+        } else {
+            $result['status'] = 0;
+            $result['message'] = "Моля използвайте Excel формат файлове";
+        }
+
         return $result;
     }
 

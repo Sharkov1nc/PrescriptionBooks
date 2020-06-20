@@ -16,7 +16,7 @@ class Drugs extends Connection
         return self::$instance;
     }
 
-    public function importDrugs(){
+    public function importDrugs($data){
         $allowedFileType = [
             'application/vnd.ms-excel',
             'text/xls',
@@ -28,9 +28,9 @@ class Drugs extends Connection
             'status' => 1
         );
 
-        if (in_array($_FILES['drugs_excel']['type'], $allowedFileType)) {
-            $targetPath = '../uploads/' . $_FILES['drugs_excel']['name'];
-            move_uploaded_file($_FILES['drugs_excel']['tmp_name'], $targetPath);
+        if (in_array($data['type'], $allowedFileType)) {
+            $targetPath = '../uploads/' . $data['name'];
+            move_uploaded_file($data['tmp_name'], $targetPath);
 
             $excelReader = PHPExcel_IOFactory::createReaderForFile($targetPath);
             $excelObj = $excelReader->load($targetPath);

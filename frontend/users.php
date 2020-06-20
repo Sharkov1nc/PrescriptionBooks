@@ -22,6 +22,10 @@ include_once  '../backend/Users.php';
                                         <i class="s7-add-user"></i>
                                         <p>Добавяне на потребител</p>
                                     </a>
+                                    <a class="text-center box excel-import-button">
+                                        <i class="s7-server"></i>
+                                        <p>Импортирай пациенти от Excel</p>
+                                    </a>
                                     <a data-toggle="modal" data-target="#search-modal" class="text-center box">
                                         <i class="s7-search"></i>
                                         <p>Търсене на потребител</p>
@@ -59,6 +63,9 @@ include_once  '../backend/Users.php';
                                         </table>
                                     </div>
                                 </div>
+                                <form action="../backend/users_controller.php" method="POST" id="excel-import" class="d-none" enctype="multipart/form-data">
+                                    <input type="file" name="users_excel" id="file" accept=".xls,.xlsx">
+                                </form>
                             </div>
                             <div class="modal" id="search-modal">
                                 <div class="modal-dialog">
