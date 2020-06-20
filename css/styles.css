@@ -160,6 +160,9 @@ body {
 .breadcrumb .breadcrumb-item::before {
     color: #e1e1e1;
 }
+.icon-menu-container {
+    margin-left: -8px;
+}
 .icon-menu-container .box{
     float: left;
     width: 23.8% !important;
@@ -360,7 +363,13 @@ table > .thead-dark > tr > .table-title {
     border: 1px solid #ddd;
     color: #333;
 }
-
+.no-results {
+    text-align: center;
+    padding-right: 100px;
+}
+.mark-as-taken {
+    cursor: pointer;
+}
 
 
 

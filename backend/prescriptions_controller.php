@@ -35,6 +35,12 @@ if(isset($_POST['action'])){
             $result = $prescriptionBooks->printRecipe(null, $data);
             echo json_encode($result);
         }
+    }  else if($_POST['action'] == "search_hash"){
+        $recipe = $prescriptionBooks->searchHash($_POST['hash']);
+        $result = $prescriptionBooks->printRecipe($recipe['recipe_id']);
+    } else if($_POST['action'] == 'mark-as-taken'){
+        $result = $prescriptionBooks->markRecipeAsTaken($_POST['recipe_id']);
+        echo json_encode($result);
     }
 } else if(isset($_GET['action'])) {
     if($_GET['action'] == 'search' || $_GET['action'] == 'search_written') {
@@ -70,5 +76,8 @@ if(isset($_POST['action'])){
             $previous = true;
         }
         $result= $prescriptionBooks->printRecipe($_GET['recipe_id'], null, $previous);
+    } else if($_GET['action'] == "search_hash"){
+        $result = $prescriptionBooks->searchHash($_GET['hash']);
+        echo json_encode($result);
     }
 }

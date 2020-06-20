@@ -152,14 +152,18 @@ class PrescriptionBooks extends Connection
         $query = '';
         $data = [];
         $date =  gmdate('Y-m-d H:i:s', strtotime('-1 month'));
+        $where = '';
+        if($this->user->user_position == 2){
+            $where = "AND prescription_books.doctor_id = ".$this->user->id ;
+        }
         if($recipeId){
-            $query = "SELECT users.id as user_id, users.fname as user_fname, users.lname as user_lname, recipe.id as recipe_id, recipe.`date` as recipe_date, recipe.additional_information, doctor.fname as doctor_fname, doctor.lname as doctor_lname  FROM prescription_books INNER JOIN recipe ON prescription_books.id = recipe.prescription_book_id INNER JOIN users ON prescription_books.patient_id = users.id INNER JOIN users as doctor ON doctor.id = prescription_books.doctor_id WHERE recipe.`date` > '".$date."' AND prescription_books.doctor_id = ".$this->user->id." AND recipe.id = ".$recipeId." GROUP BY users.id ORDER BY recipe.`date` DESC";
+            $query = "SELECT users.id as user_id, users.fname as user_fname, users.lname as user_lname, recipe.id as recipe_id, recipe.`date` as recipe_date, recipe.additional_information, doctor.fname as doctor_fname, doctor.lname as doctor_lname  FROM prescription_books INNER JOIN recipe ON prescription_books.id = recipe.prescription_book_id INNER JOIN users ON prescription_books.patient_id = users.id INNER JOIN users as doctor ON doctor.id = prescription_books.doctor_id WHERE recipe.`date` > '".$date."' AND recipe.id = ".$recipeId." ".$where." GROUP BY users.id ORDER BY recipe.`date` DESC";
         } else {
             $lnameSearch = '';
             if($userLname){
                 $lnameSearch = " OR users.lname LIKE '%".$userLname."%' ";
             }
-            $query = "SELECT users.id as user_id, users.fname as user_fname, users.lname as user_lname, recipe.id as recipe_id, recipe.`date` as recipe_date FROM prescription_books LEFT JOIN recipe ON prescription_books.id = recipe.prescription_book_id LEFT JOIN users ON prescription_books.patient_id = users.id WHERE recipe.`date` > '".$date."' AND prescription_books.doctor_id = ".$this->user->id." AND (users.fname LIKE '%".$userFname."%' ". $lnameSearch .") GROUP BY users.id ORDER BY recipe.`date` DESC";
+            $query = "SELECT users.id as user_id, users.fname as user_fname, users.lname as user_lname, recipe.id as recipe_id, recipe.`date` as recipe_date FROM prescription_books LEFT JOIN recipe ON prescription_books.id = recipe.prescription_book_id LEFT JOIN users ON prescription_books.patient_id = users.id WHERE recipe.`date` > '".$date."' ".$where." AND (users.fname LIKE '%".$userFname."%' ". $lnameSearch .") GROUP BY users.id ORDER BY recipe.`date` DESC";
         }
         $result  = $this->conn->query($query);
         if($result->num_rows > 0){
@@ -211,7 +215,22 @@ class PrescriptionBooks extends Connection
     }
 
     public function markRecipeAsTaken($recipeId){
-        // recipe received date and pharmacy id update
+        $date = gmdate('Y-m-d H:i:s', time());
+        $this->conn->query("UPDATE recipe SET pharmacist_id = ".$this->user->id.", received_date = '".$date."' WHERE id = ".$recipeId);
+        if($this->conn->error){
+            $status = false;
+        } else {
+            $status = true;
+        }
+        return $status;
+    }
+
+    public function searchHash($hash){
+        $result = $this->conn->query("SELECT users.id as user_id, users.fname as user_fname, users.lname as user_lname, recipe.id as recipe_id, recipe.`date` as recipe_date  FROM prescription_books INNER JOIN recipe ON prescription_books.id = recipe.prescription_book_id INNER JOIN users ON prescription_books.patient_id = users.id WHERE recipe.hash = '".$hash."' AND recipe.pharmacist_id IS NULL GROUP BY users.id ORDER BY recipe.`date` DESC LIMIT 1");
+        if($result->num_rows > 0){
+            return $result->fetch_assoc();
+        }
+        return false;
     }
 
     private function getUserEmail($userId){

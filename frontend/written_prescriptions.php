@@ -7,7 +7,7 @@ $pageTitle = "Изписани рецепти";
 <html lang="en">
 <head>
     <?php include_once  'includes/libs.php'; ?>
-    <script src="../js/written_prescriptions.php.js"></script>
+    <script src="../js/written_prescriptions.js"></script>
 </head>
 <body>
 <div class="container-fluid">

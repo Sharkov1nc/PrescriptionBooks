@@ -34,10 +34,16 @@
                                         <p>Пациенти</p>
                                     </a>
                                 <?php } ?>
-                                <?php if ($authentication->user->user_position == 2 || $authentication->user->user_position == 4) { ?>
+                                <?php if ($authentication->user->user_position == 2) { ?>
                                     <a href="written_prescriptions.php" class="text-center box">
                                         <i class="s7-note2"></i>
                                         <p>Изписани рецепти</p>
+                                    </a>
+                                <?php } ?>
+                                <?php if($authentication->user->user_position == 4) {?>
+                                    <a href="pharmacy.php" class="text-center box">
+                                        <i class="s7-search"></i>
+                                        <p>Търсене на рецепти</p>
                                     </a>
                                 <?php } ?>
                             </div>
