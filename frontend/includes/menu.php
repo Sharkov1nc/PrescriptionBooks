@@ -33,7 +33,7 @@
                 <span class="item-menu-title">Пациенти</span>
             </a>
         <?php } ?>
-        <?php if ($authentication->user->user_position == 2) { ?>
+        <?php if ($authentication->user->user_position == 2 || $authentication->user->user_position == 3) { ?>
             <a href="written_prescriptions.php" class="list-group-item list-group-item-action">
                 <i class="s7-note2"></i>
                 <span class="item-menu-title">Изписани рецепти</span>

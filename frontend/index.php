@@ -34,7 +34,7 @@
                                         <p>Пациенти</p>
                                     </a>
                                 <?php } ?>
-                                <?php if ($authentication->user->user_position == 2) { ?>
+                                <?php if ($authentication->user->user_position == 2 || $authentication->user->user_position == 3) { ?>
                                     <a href="written_prescriptions.php" class="text-center box">
                                         <i class="s7-note2"></i>
                                         <p>Изписани рецепти</p>
