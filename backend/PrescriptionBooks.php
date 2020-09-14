@@ -48,6 +48,17 @@ class PrescriptionBooks extends Connection
         return $data;
     }
 
+    public function getPatientRecipes() {
+        $data = [];
+        $result = $this->conn->query("SELECT users.id, users.fname, users.lname, recipe.id as recipe_id, recipe.`date` as recipe_date FROM prescription_books LEFT JOIN recipe ON prescription_books.id = recipe.prescription_book_id LEFT JOIN users ON prescription_books.patient_id = users.id WHERE prescription_books.patient_id = ".$this->user->id." ORDER BY recipe.`date` DESC");
+        if($result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+                $data[] = $row;
+            }
+        }
+        return $data;
+    }
+
     public function addRecipe($data){
         $date = new DateTime();
         $dateField = $date->format('Y-m-d H:i:s');
