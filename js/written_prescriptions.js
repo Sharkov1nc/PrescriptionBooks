@@ -126,6 +126,16 @@ $(document).ready(function() {
         selectedDrugs = [];
     });
 
+    selectedDrugsContainer.on('click', '.badge-drugs', function () {
+        let drug = this;
+        $.each(selectedDrugs, function(key, val) {
+            if (val && val.id == drug.id) {
+                selectedDrugs.splice(key, 1);
+                drug.remove();
+            }
+        });
+    });
+
     editPrescriptionForm.on('submit', function (e) {
         e.preventDefault();
         let additionalInfo = $(this).find('textarea[name="additional_information"]').val();
