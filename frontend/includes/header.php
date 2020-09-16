@@ -1,7 +1,7 @@
 <div class="row page-header">
     <div class="col-2">
         <div class="logo-section">
-            SharkSoft
+            PB Software
         </div>
     </div>
     <div class="col-10">
