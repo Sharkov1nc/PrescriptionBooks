@@ -111,7 +111,7 @@ class Authentication extends Connection {
         $result = array(
             'status' => 1
         );
-        if(strlen($email) < 6) {
+        if(strpos($email, '@') === false || strlen($email) < 6) {
             $result['status'] = 0;
             $result['message'] = 'Невалиден имейл';
             return $result;
