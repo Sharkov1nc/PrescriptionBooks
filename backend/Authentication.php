@@ -23,6 +23,12 @@ class Authentication extends Connection {
         $position = isset($data['position']) ? $data['position'] : 3;
         $this->conn->query("INSERT INTO users (fname, lname, egn, email, password, `user_position`, `date`)  
         VALUES('".$data['fname']."', '".$data['lname']."', '".$data['egn']."', '".$data['email']."', '".$password."', '".$position."', '".$dateField."')");
+        if($this->conn->error){
+            return [
+                'status' => 0,
+                'message' => 'Този e-mail адрес вече се използва от друг потребител'
+            ];
+        }
         $userId = $this->conn->insert_id;
         if($position == 3){
             $this->conn->query("INSERT INTO prescription_books(patient_id, doctor_id, `date`) VALUES(".$userId.", ".$data['doctor'].", '".$dateField."')");
