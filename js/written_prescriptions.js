@@ -147,6 +147,9 @@ $(document).ready(function() {
                 data = JSON.parse(data);
                 if(data.status){
                     editPrescriptionModal.modal('hide');
+                } else {
+                    editPrescriptionModal.modal('hide');
+                    errorHandler(data.message);
                 }
             }
         });

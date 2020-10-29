@@ -79,6 +79,9 @@ $(document).ready(function() {
                 if(data.status){
                     addPrescriptionModal.modal('hide');
                     $("#prescrition-row-" + prescriptionBookId).remove();
+                } else {
+                    addPrescriptionModal.modal('hide');
+                    errorHandler(data.message);
                 }
             }
         });

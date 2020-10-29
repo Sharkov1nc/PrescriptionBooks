@@ -3,13 +3,27 @@ include_once 'PrescriptionBooks.php';
 $prescriptionBooks = new PrescriptionBooks();
 if(isset($_POST['action'])){
     if($_POST['action'] == 'add'){
-        $result = $prescriptionBooks->addRecipe($_POST);
+        if(isset($_POST['drugs']) && !empty($_POST['drugs'])){
+            $result = $prescriptionBooks->addRecipe($_POST);
+        } else {
+            $result = [
+                'status' => 0,
+                'message' => 'За да добавите рецепта е необходимо да изпишете лекарства за пациента!'
+            ];
+        }
         echo json_encode($result);
     } else if($_POST['action'] == 'delete'){
         $result = $prescriptionBooks->deleteRecipe($_POST['recipe_id']);
         echo json_encode($result);
     } else if($_POST['action'] == 'edit'){
-        $result = $prescriptionBooks->editRecipe($_POST);
+        if(isset($_POST['drugs']) && !empty($_POST['drugs'])) {
+            $result = $prescriptionBooks->editRecipe($_POST);
+        } else {
+            $result = [
+                'status' => 0,
+                'message' => 'За да редактирате рецепта е необходимо да изпишете лекарства за пациента!'
+            ];
+        }
         echo json_encode($result);
     } else if($_POST['action'] == 'preview'){
         if (isset($_POST['names']) && strlen($_POST['names']) > 2) {
